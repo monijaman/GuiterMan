@@ -143,6 +143,26 @@ function progressionsFor(root, quality) {
   return { keys, rows, home, lookupQuality };
 }
 
+// Each chord is its own page to search engines: give it a canonical URL, description and share tags.
+function updateSeo(symbol, qualityLabel, names, shapeCount) {
+  const url = `https://monijaman.github.io/GuiterMan/chords/detail.html?root=${encodeURIComponent(selectedRoot)}&quality=${selectedQuality}`;
+  const description = `${symbol} guitar chord (${selectedRoot} ${qualityLabel}): notes ${names.join(', ')}, ${shapeCount} playable shape${shapeCount === 1 ? '' : 's'} with note names, a full-neck map, related keys and progressions.`;
+  const setMeta = (attribute, name, content) => {
+    let meta = document.head.querySelector(`meta[${attribute}="${name}"]`);
+    if (!meta) { meta = document.createElement('meta'); meta.setAttribute(attribute, name); document.head.append(meta); }
+    meta.setAttribute('content', content);
+  };
+  let canonical = document.head.querySelector('link[rel="canonical"]');
+  if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.append(canonical); }
+  canonical.href = url;
+  setMeta('name', 'description', description);
+  setMeta('property', 'og:title', `${symbol} guitar chord`);
+  setMeta('property', 'og:description', description);
+  setMeta('property', 'og:url', url);
+  setMeta('name', 'twitter:title', `${symbol} guitar chord`);
+  setMeta('name', 'twitter:description', description);
+}
+
 function renderChord() {
   const definition = chordModel.qualities[selectedQuality];
   const notes = chordModel.spellTones(selectedRoot, selectedQuality);
@@ -150,6 +170,7 @@ function renderChord() {
   const names = notes.map((note) => note.note);
   const voicings = selectedVoicings(selectedRoot, selectedQuality);
   document.title = `${symbol} chord: notes, shapes & theory — Guitar Field Notes`;
+  updateSeo(symbol, definition.label.toLowerCase(), names, voicings.length);
 
   const alias = enharmonic[selectedRoot] ? ` Same sound as <strong>${enharmonic[selectedRoot]}${definition.suffix}</strong>.` : '';
   document.querySelector('#chordHero').innerHTML = `<p class="eyebrow">CHORD GUIDE / ${definition.label.toUpperCase()}</p><h1>${symbol}<br><em>${selectedRoot} ${definition.label.toLowerCase()}.</em></h1><p>Notes: <strong>${names.join(' · ')}</strong>. ${chordModel.usage[selectedQuality] ?? ''}${alias}</p><button class="hear-button" type="button" data-play="0">▶ Hear ${symbol}</button>`;

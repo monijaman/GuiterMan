@@ -24,3 +24,10 @@ The home page also includes an interactive 12-fret scale map, chord progressions
 Practice checklists and sketches are saved in the browser's local storage on the current device. Clearing site data or switching browsers can remove that saved progress.
 
 Reference images are stored in `../resourcess/gmajor/`.
+
+## Search engines and sharing
+
+Every page has a title, description, canonical link, Open Graph and Twitter card tags, and schema.org structured data. The site also ships `favicon.svg`, app icons, `site.webmanifest`, `social-card.png` (the 1200×630 share image), `robots.txt` and `sitemap.xml` (every page plus all 204 chord guides). The chord guide updates its own title, description and canonical link for the chord it shows.
+
+These use the address `https://monijaman.github.io/GuiterMan/`. If the site is published somewhere else, replace that address in the HTML files, `chords/detail.js`, `robots.txt` and `sitemap.xml`.
+

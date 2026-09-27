@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://monijaman.github.io/GuiterMan/sitemap.xml

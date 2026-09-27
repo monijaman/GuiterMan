@@ -1,0 +1,27 @@
+{
+  "name": "Guitar Field Notes",
+  "short_name": "Guitar Notes",
+  "description": "Free visual guitar course: 9 graded lessons, 204 chords, scales in any key, arpeggios, music theory, ear training and practice tools you can hear in your browser.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#141916",
+  "theme_color": "#141916",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
