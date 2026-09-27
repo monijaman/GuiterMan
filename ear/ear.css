@@ -48,10 +48,10 @@
 .dl-step.is-stable circle{stroke:var(--green-dark)}
 .dl-step.is-tense circle{stroke:var(--coral)}
 .dl-step:hover circle,.dl-step.is-playing circle{fill:var(--coral);stroke:var(--coral)}
-.dl-solf{font:700 12px var(--sans);text-anchor:middle;fill:var(--ink)}
-.dl-num{font:10px var(--mono);text-anchor:middle;fill:var(--muted)}
-.dl-step.is-home .dl-solf,.dl-step.is-home .dl-num{fill:#182019}
-.dl-step:hover .dl-solf,.dl-step:hover .dl-num,.dl-step.is-playing .dl-solf,.dl-step.is-playing .dl-num{fill:#fff}
+.dl-solf{font:700 11px var(--sans);text-anchor:middle;fill:var(--ink)}
+.dl-num{font:11px var(--mono);text-anchor:start;fill:var(--muted)}
+.dl-step.is-home .dl-solf{fill:#182019}
+.dl-step:hover .dl-solf,.dl-step.is-playing .dl-solf{fill:#fff}
 .dl-note{font:700 13px var(--mono);text-anchor:end;fill:var(--coral)}
 .dl-arrow{fill:none;stroke:var(--coral);stroke-width:2}
 .dl-arrow-label{font:10px var(--mono);fill:var(--coral)}
@@ -93,7 +93,8 @@
 .chord-card h3 small{display:block;font:11px var(--mono);color:var(--muted)}
 .chord-card .cd{width:100%;max-width:170px;height:auto;margin:6px auto 0;display:block}
 .chord-formula{margin:6px 0 0;font:700 13px var(--mono);color:var(--coral)}
-.chord-card p{margin:6px 0 0;font-size:12.5px;line-height:1.5;color:var(--muted);flex:1}
+.chord-card p{margin:6px 0 0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.chord-card .int-buttons{margin-top:auto;padding-top:10px}
 
 /* gym */
 .gym-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:-1px;position:relative}

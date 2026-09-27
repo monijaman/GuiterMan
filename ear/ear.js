@@ -12,7 +12,9 @@ const pretty = (text) => text.replace(/([A-G])b/g, '$1♭');
 const pick = (list) => list[Math.floor(Math.random() * list.length)];
 const randInt = (low, high) => low + Math.floor(Math.random() * (high - low + 1));
 const rootPc = (root) => chordModel.pitchByName[root];
-const keyNote = (root, semitones) => pretty((FLAT_KEYS.includes(root) ? FLATS : SHARPS)[(rootPc(root) + semitones) % 12]);
+// Spell a degree in a key: flat keys and lowered degrees (b3, b7…) use flats, raised ones (#4) sharps.
+const keyNote = (root, semitones) => pretty(((FLAT_KEYS.includes(root) || [1, 3, 8, 10].includes(semitones % 12)) && semitones % 12 !== 6 ? FLATS : SHARPS)[(rootPc(root) + semitones) % 12]);
+const intervalNote = (midi, semitones) => pretty(([1, 3, 8, 10].includes(semitones) ? FLATS : SHARPS)[pc(midi + semitones)]);
 const tonicMidi = (root) => 48 + rootPc(root);
 
 // A comfortable place to play a pitch: the highest string where it sits in frets 0–9.
@@ -127,13 +129,13 @@ function relativeSvg() {
   for (let fret = 0; fret <= 5; fret += 1) parts.push(`<text x="${x(fret)}" y="${y + 38}" class="rp-num">${fret || 'open'}</text>`);
   parts.push(`<path d="M${x(0) + 8} ${y - 20} Q${(x(0) + x(3)) / 2} ${y - 62} ${x(3) - 8} ${y - 20}" class="rp-arc" marker-end="url(#rpHead)"/><text x="${(x(0) + x(3)) / 2}" y="${y - 50}" class="rp-arc-label">3 frets = minor 3rd</text>`);
   parts.push(`<g class="rp-dot is-ref"><circle cx="${x(0)}" cy="${y}" r="16"/><text x="${x(0)}" y="${y + 5}">A</text></g><g class="rp-dot is-target"><circle cx="${x(3)}" cy="${y}" r="16"/><text x="${x(3)}" y="${y + 5}">?</text></g>`);
-  const steps = [['1', 'Hear the reference', 'home note or open string'], ['2', 'Feel the distance', 'step, leap, degree'], ['3', 'Name it', 'C, the minor 3rd above A']];
+  const steps = [['1', 'Hear the reference', 'home or open string'], ['2', 'Feel the distance', 'step, leap, degree'], ['3', 'Name it', 'C: 3 frets above A']];
   steps.forEach(([num, title, sub], index) => {
-    const bx = 420 + index * 150;
-    parts.push(`<g class="rp-step"><rect x="${bx}" y="22" width="136" height="92" rx="10"/><circle cx="${bx + 22}" cy="46" r="13"/><text x="${bx + 22}" y="51" class="rp-step-num">${num}</text><text x="${bx + 12}" y="80" class="rp-step-title">${title}</text><text x="${bx + 12}" y="99" class="rp-step-sub">${sub}</text></g>`);
-    if (index < 2) parts.push(`<path d="M${bx + 138} 68 L${bx + 148} 68" class="rp-arc" marker-end="url(#rpHead)"/>`);
+    const bx = 410 + index * 166;
+    parts.push(`<g class="rp-step"><rect x="${bx}" y="22" width="152" height="92" rx="10"/><circle cx="${bx + 22}" cy="46" r="13"/><text x="${bx + 22}" y="51" class="rp-step-num">${num}</text><text x="${bx + 12}" y="80" class="rp-step-title">${title}</text><text x="${bx + 12}" y="99" class="rp-step-sub">${sub}</text></g>`);
+    if (index < 2) parts.push(`<path d="M${bx + 153} 68 L${bx + 164} 68" class="rp-arc" marker-end="url(#rpHead)"/>`);
   });
-  return `<svg class="e-svg" viewBox="0 0 870 132" role="img" aria-label="Reference note A, then a note three frets higher, named C"><defs><marker id="rpHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="rp-head"/></marker></defs>${parts.join('')}</svg>`;
+  return `<svg class="e-svg" viewBox="0 0 910 132" role="img" aria-label="Reference note A, then a note three frets higher, named C"><defs><marker id="rpHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="rp-head"/></marker></defs>${parts.join('')}</svg>`;
 }
 $('#relativePic').innerHTML = relativeSvg();
 $('#anchors').innerHTML = STRING_NAMES.map((name, string) => `<button type="button" class="anchor" data-anchor="${string}"><span>${6 - string}</span><b>${name.toUpperCase()}</b><small>${noteName(STRING_MIDI[string])}${octaveOf(STRING_MIDI[string])}</small></button>`).join('') + '<button type="button" class="anchor is-all" data-anchor="all"><b>▶</b><small>all six</small></button>';
@@ -149,21 +151,21 @@ $('#anchors').addEventListener('click', (event) => {
 const degKey = $('#degKey');
 degKey.innerHTML = KEY_ROOTS.map((root) => `<option value="${root}">${pretty(root)} major</option>`).join('');
 function ladderSvg() {
-  const unit = 21, bottom = 290, cx = 120;
+  const unit = 29, bottom = 372, cx = 120;
   const y = (st) => bottom - st * unit;
   const parts = [`<line x1="${cx}" y1="${y(12) - 10}" x2="${cx}" y2="${y(0) + 10}" class="dl-rail"/>`];
   const arrows = [[2, 0], [5, 4], [9, 7], [11, 12]];
   arrows.forEach(([from, to]) => {
     const dy = y(to) - y(from);
-    parts.push(`<path d="M${cx + 30} ${y(from)} C${cx + 78} ${y(from)} ${cx + 78} ${y(to)} ${cx + 32} ${y(to)}" class="dl-arrow" marker-end="url(#dlHead)"/>`);
-    parts.push(`<text x="${cx + 82}" y="${(y(from) + y(to)) / 2 + 4}" class="dl-arrow-label">${dy < 0 ? 'up' : 'down'}</text>`);
+    parts.push(`<path d="M${cx + 40} ${y(from)} C${cx + 88} ${y(from)} ${cx + 88} ${y(to)} ${cx + 42} ${y(to)}" class="dl-arrow" marker-end="url(#dlHead)"/>`);
+    parts.push(`<text x="${cx + 92}" y="${(y(from) + y(to)) / 2 + 4}" class="dl-arrow-label">${dy < 0 ? 'up' : 'down'}</text>`);
   });
   MAJOR_SET.forEach((st) => {
     const degree = DEG[st % 12];
     const cls = st % 12 === 0 ? 'is-home' : degree.stable ? 'is-stable' : 'is-tense';
-    parts.push(`<g class="dl-step ${cls}" data-deg="${st}"><circle cx="${cx}" cy="${y(st)}" r="22"/><text x="${cx}" y="${y(st) - 2}" class="dl-solf">${degree.solf}</text><text x="${cx}" y="${y(st) + 12}" class="dl-num">${st === 12 ? '8' : degree.num}</text><text x="${cx - 36}" y="${y(st) + 5}" class="dl-note" data-note="${st}"></text></g>`);
+    parts.push(`<g class="dl-step ${cls}" data-deg="${st}"><circle cx="${cx}" cy="${y(st)}" r="17"/><text x="${cx}" y="${y(st) + 4}" class="dl-solf">${degree.solf}</text><text x="${cx + 26}" y="${y(st) + 4}" class="dl-num">${st === 12 ? '8' : degree.num}</text><text x="${cx - 30}" y="${y(st) + 5}" class="dl-note" data-note="${st}"></text></g>`);
   });
-  [[4, 5], [11, 12]].forEach(([a, b]) => parts.push(`<text x="${cx - 88}" y="${(y(a) + y(b)) / 2 + 4}" class="dl-half">½ step</text>`));
+  [[4, 5], [11, 12]].forEach(([a, b]) => parts.push(`<text x="${cx - 100}" y="${(y(a) + y(b)) / 2 + 4}" class="dl-half">½ step</text>`));
   return `<svg class="e-svg ladder" viewBox="0 0 260 ${bottom + 34}" role="img" aria-label="Scale degree ladder with tendencies"><defs><marker id="dlHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="rp-head"/></marker></defs>${parts.join('')}</svg>`;
 }
 $('#degLadder').innerHTML = ladderSvg();
@@ -202,7 +204,7 @@ function intervalNeck(n) {
   parts.push(`<circle cx="${x(rootFret)}" cy="${y(1)}" r="5.5" class="in-dot is-root"/>`);
   return `<svg class="e-svg int-neck" viewBox="0 0 ${left * 2 + 15 * fw} ${top * 2 + gap * 5}" role="img" aria-label="${INT[n].name} from C on the A string">${parts.join('')}</svg>`;
 }
-$('#intCards').innerHTML = INTERVALS.map((interval) => `<article class="int-card"><header><span class="int-short">${interval.short}</span><div><h3>${interval.name}</h3><small>${interval.n} semitone${interval.n > 1 ? 's' : ''} · C → ${noteName(48 + interval.n)}</small></div></header>${intervalNeck(interval.n)}<p class="int-feel">${interval.feel}</p><p class="int-hook"><b>↑</b> ${interval.up}${interval.down ? `<br><b>↓</b> ${interval.down}` : ''}</p><div class="int-buttons"><button type="button" data-int="${interval.n}" data-dir="up">▶ Up</button><button type="button" data-int="${interval.n}" data-dir="down">▶ Down</button><button type="button" data-int="${interval.n}" data-dir="harmonic">▶ Together</button></div></article>`).join('');
+$('#intCards').innerHTML = INTERVALS.map((interval) => `<article class="int-card"><header><span class="int-short">${interval.short}</span><div><h3>${interval.name}</h3><small>${interval.n} semitone${interval.n > 1 ? 's' : ''} · C → ${intervalNote(48, interval.n)}</small></div></header>${intervalNeck(interval.n)}<p class="int-feel">${interval.feel}</p><p class="int-hook"><b>↑</b> ${interval.up}${interval.down ? `<br><b>↓</b> ${interval.down}` : ''}</p><div class="int-buttons"><button type="button" data-int="${interval.n}" data-dir="up">▶ Up</button><button type="button" data-int="${interval.n}" data-dir="down">▶ Down</button><button type="button" data-int="${interval.n}" data-dir="harmonic">▶ Together</button></div></article>`).join('');
 $('#intCards').addEventListener('click', (event) => {
   const button = event.target.closest('[data-int]');
   if (!button) return;
@@ -254,7 +256,7 @@ const DRILLS = [
   },
   {
     id: 'degree', name: 'Scale degrees', how: 'The chords of a key play first, then one note. Which step of the scale is it? This is the most useful ear skill: it works in any key.',
-    levels: ['1 · 3 · 5', '1 to 5', 'All seven (major scale)', 'All twelve (chromatic)'],
+    levels: ['Do Mi Sol (1 3 5)', 'Do to Sol (1–5)', 'All seven (major scale)', 'All twelve (chromatic)'],
     extra: { label: 'KEY', options: [['random', 'Random key'], ...KEY_ROOTS.map((root) => [root, `${pretty(root)} major`])] },
     make(level, extra) {
       const sets = [[0, 4, 7], [0, 2, 4, 5, 7], [0, 2, 4, 5, 7, 9, 11], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]];
@@ -291,7 +293,7 @@ const DRILLS = [
         options: sets[level].map((step) => ({ id: String(step), label: INT[step].short, sub: INT[step].name })),
         answer: String(n),
         hear: (id) => playInterval(root, Number(id), direction),
-        explain: () => `It was a <b>${INT[n].name}</b>: ${n} semitone${n > 1 ? 's' : ''} (${noteName(root)} → ${noteName(root + n)}). ${INT[n].feel} Hook: ${hook}.`,
+        explain: () => `It was a <b>${INT[n].name}</b>: ${n} semitone${n > 1 ? 's' : ''} (${noteName(root)} → ${intervalNote(root, n)}). ${INT[n].feel} Hook: ${hook}.`,
         after: () => playInterval(root, n, direction === 'harmonic' ? 'up' : direction)
       };
     }
