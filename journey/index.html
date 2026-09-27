@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Answer a few questions about the mood and style you want, and get a complete guitar journey: key and mode, chords, strumming, fingerpicking, scale positions across the neck, arpeggios and a lead line."><title>Journey — Guitar Field Notes</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../learning.css"><link rel="stylesheet" href="journey.css"><script src="../chords/chord-data.js" defer></script><script src="../chord-diagram.js" defer></script><script src="../fretboard.js" defer></script><script src="journey.js" defer></script></head>
+<body><header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">G</span><span>GUITAR<br>FIELD NOTES</span></a><nav class="main-nav"><a href="../theory/index.html">Music theory</a><a href="../ear/index.html">Ear training</a><a href="../index.html#levels">Course path</a><a href="../chords/index.html">Chord library</a><a href="../scales/index.html">Scales & harmony</a><a href="../arpeggios/index.html">Arpeggios</a><a href="index.html" aria-current="page">Journey</a></nav><a class="top-cta" href="../practice/index.html">Practice <span aria-hidden="true">↗</span></a></header>
+<main class="page-shell journey-page">
+  <section class="chord-page-hero journey-hero"><div>
+    <p class="eyebrow">INTERACTIVE / YOUR GUITAR JOURNEY</p>
+    <h1>Tell me the feeling.<br><em>I'll map the fretboard.</em></h1>
+    <p>Answer four quick questions. You'll get a key and mode that match your mood, chords with shapes for your level, a strumming and a picking pattern for your genre, where to play the scale on the neck, arpeggios for every chord, and a lead line to start from, plus alternatives for each.</p>
+  </div></section>
+
+  <section class="quiz" id="quiz" aria-live="polite">
+    <div class="quiz-progress" id="quizProgress"></div>
+    <div id="quizBody"></div>
+    <div class="quiz-nav"><button type="button" class="hear-button" id="quizBack">← Back</button><button type="button" class="hear-button" id="quizRandom">🎲 Surprise me</button></div>
+  </section>
+
+  <div id="results" hidden>
+    <nav class="scale-subnav" aria-label="Your journey"><a href="#sound"><b>01</b> Your sound</a><a href="#chords"><b>02</b> Chords</a><a href="#rhythm"><b>03</b> Strumming</a><a href="#picking"><b>04</b> Picking</a><a href="#scale"><b>05</b> Scale & where to play</a><a href="#arps"><b>06</b> Arpeggios</a><a href="#lead"><b>07</b> Lead line</a><a href="#roadmap"><b>08</b> Your roadmap</a></nav>
+
+    <section id="sound" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">01 / YOUR SOUND</p><h2 id="soundTitle"></h2></div><p id="soundLead"></p></div>
+      <div class="scale-toolbar">
+        <label>KEY<select id="keySelect"></select></label>
+        <label>TEMPO<select id="tempoSelect"></select></label>
+        <button type="button" class="hear-button" id="restart">↺ Change my answers</button>
+        <button type="button" class="hear-button" data-stop>■ Stop sound</button>
+      </div>
+      <div class="sound-grid">
+        <article class="sound-card" id="answerCard"></article>
+        <figure class="j-figure"><div id="modeStrip"></div><figcaption id="modeCaption"></figcaption></figure>
+      </div>
+      <div class="fb-facts" id="soundFacts"></div>
+    </section>
+
+    <section id="chords" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">02 / CHORDS</p><h2>Your progression</h2></div><p>Each chord is one bar. Shapes are picked for your level; click a chord to open it in the chord library for more shapes.</p></div>
+      <div class="scale-toolbar">
+        <label>PROGRESSION<select id="progSelect"></select></label>
+        <label>SHAPES<select id="voicingSelect"><option value="auto">Suggested for my level</option><option value="open">Open chords where possible</option><option value="barre">Movable / barre shapes</option><option value="color">Add colour (7ths)</option></select></label>
+        <button type="button" class="hear-button" data-play="chords">▶ Play progression</button>
+      </div>
+      <p class="j-note" id="progNote"></p>
+      <div class="j-chips" id="chordChips"></div>
+      <h3 class="sub-heading">Alternatives in the same key</h3>
+      <div class="alt-grid" id="progAlts"></div>
+    </section>
+
+    <section id="rhythm" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">03 / STRUMMING</p><h2 id="strumTitle"></h2></div><p>Count out loud. Your hand keeps moving down on the numbers and up on the "&", even when it misses the strings.</p></div>
+      <div class="scale-toolbar">
+        <label>PATTERN<select id="strumSelect"></select></label>
+        <button type="button" class="hear-button" data-play="strum">▶ Play with the progression</button>
+      </div>
+      <figure class="j-figure"><div id="strumGrid"></div><figcaption id="strumTip"></figcaption></figure>
+    </section>
+
+    <section id="picking" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">04 / PICKING & FINGERSTYLE</p><h2 id="pickTitle"></h2></div><p>Hold the chord shape and pick single strings. <b>p</b> = thumb (bass strings), <b>i m a</b> = index, middle, ring. With a pick, use down-strokes on the numbers and up-strokes on the "&".</p></div>
+      <div class="scale-toolbar">
+        <label>PATTERN<select id="pickSelect"></select></label>
+        <button type="button" class="hear-button" data-play="pick">▶ Play through the progression</button>
+      </div>
+      <div class="j-figure"><div class="tab-scroll" id="pickTab"></div><p class="j-caption" id="pickTip"></p></div>
+    </section>
+
+    <section id="scale" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">05 / SCALE & WHERE TO PLAY</p><h2 id="scaleTitle"></h2></div><p>One scale covers the whole progression. Start in the recommended position (★), then connect the others and use the whole neck.</p></div>
+      <div class="scale-toolbar">
+        <label>SCALE<select id="scaleSelect"></select></label>
+        <label>POSITION<select id="posSelect"></select></label>
+        <label>LABELS<select id="labelSelect"><option value="note">Note names</option><option value="degree">Scale degrees</option></select></label>
+        <button type="button" class="hear-button" id="scalePlay">▶ Play position</button>
+      </div>
+      <div class="scale-summary" id="scaleNotes"></div>
+      <div class="neck-scroll"><div id="scaleBoard"></div></div>
+      <p class="scale-legend-line"><i class="lg-root"></i> Root <i class="lg-note"></i> In this position <i class="lg-faint"></i> Same scale elsewhere on the neck</p>
+      <div class="where-grid" id="whereCards"></div>
+      <h3 class="sub-heading">Every position at a glance</h3>
+      <div class="pos-strip" id="posStrip"></div>
+      <h3 class="sub-heading">Alternative scales for this sound</h3>
+      <div class="alt-grid" id="scaleAlts"></div>
+    </section>
+
+    <section id="arps" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">06 / ARPEGGIOS</p><h2>The chord tones inside your scale</h2></div><p>An arpeggio is a chord played one note at a time. Over each chord, its own notes are the safest places to land, and they sit inside the scale position you just learned.</p></div>
+      <div class="scale-toolbar">
+        <div class="arp-chips" id="arpChips"></div>
+        <button type="button" class="hear-button" id="arpPlay">▶ Play arpeggio</button>
+      </div>
+      <div class="neck-scroll"><div id="arpBoard"></div></div>
+      <p class="scale-legend-line"><i class="lg-root"></i> Chord root <i class="lg-note"></i> 3rd / 5th / 7th in this position <i class="lg-target"></i> Target notes <i class="lg-faint"></i> Other scale notes</p>
+      <div class="arp-info" id="arpInfo"></div>
+    </section>
+
+    <section id="lead" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">07 / LEAD LINE</p><h2>A melody built from your choices</h2></div><p>Generated from your scale position: a chord tone on beat 1 of every bar, stepping through the scale in between. Play it, then change the rhythm or the target notes to make it yours.</p></div>
+      <div class="scale-toolbar">
+        <button type="button" class="hear-button" data-play="lead">▶ Lead + chords</button>
+        <button type="button" class="hear-button" data-play="leadOnly">▶ Lead only</button>
+        <button type="button" class="hear-button" id="leadNew">↻ New variation</button>
+      </div>
+      <div class="j-figure"><div class="tab-scroll song-tab" id="leadTab"></div></div>
+      <div class="neck-scroll"><div id="leadBoard"></div></div>
+      <div class="fb-facts" id="leadTips"></div>
+    </section>
+
+    <section id="roadmap" class="scale-section">
+      <div class="chord-page-heading"><div><p class="eyebrow">08 / YOUR ROADMAP</p><h2>The complete journey, step by step</h2></div><p>Tick each step off as you go. Your progress is remembered in this browser.</p></div>
+      <ol class="roadmap" id="roadmapList"></ol>
+    </section>
+  </div>
+</main>
+<footer class="course-footer"><div class="page-shell"><span>GUITAR FIELD NOTES</span><a href="../theory/index.html">Music theory</a><a href="../scales/index.html">Scales & harmony</a></div></footer></body></html>

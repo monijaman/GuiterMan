@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Ear training for guitar: learn to recognise notes, scale degrees, intervals and chords by ear, with interactive drills, a microphone note detector and progress tracking."><title>Ear Training — Guitar Field Notes</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../learning.css"><link rel="stylesheet" href="ear.css"><script src="../chords/chord-data.js" defer></script><script src="../chord-diagram.js" defer></script><script src="../fretboard.js" defer></script><script src="ear.js" defer></script></head>
+<body><header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">G</span><span>GUITAR<br>FIELD NOTES</span></a><nav class="main-nav"><a href="../theory/index.html">Music theory</a><a href="index.html" aria-current="page">Ear training</a><a href="../index.html#levels">Course path</a><a href="../chords/index.html">Chord library</a><a href="../scales/index.html">Scales & harmony</a><a href="../arpeggios/index.html">Arpeggios</a><a href="../journey/index.html">Journey</a></nav><a class="top-cta" href="../practice/index.html">Practice <span aria-hidden="true">↗</span></a></header>
+<main class="page-shell ear-page">
+  <section class="chord-page-hero ear-hero"><div>
+    <p class="eyebrow">INTERACTIVE / EAR TRAINING</p>
+    <h1>Hear a note.<br><em>Know what it is.</em></h1>
+    <p>Most musicians don't have "perfect pitch", and they don't need it. They hear <b>how far</b> a note is from home. This page trains exactly that: first you <b>listen and learn</b> what each scale degree, interval and chord feels like, then you <b>test yourself</b> in the gym until naming them becomes automatic. Headphones help.</p>
+  </div></section>
+
+  <nav class="scale-subnav" aria-label="On this page"><a href="#listen"><b>01</b> How to listen</a><a href="#degrees"><b>02</b> Scale degrees</a><a href="#intervals"><b>03</b> Intervals</a><a href="#chordsounds"><b>04</b> Chord sounds</a><a href="#gym"><b>05</b> Training gym</a><a href="#detector"><b>06</b> Note detector</a><a href="#progress"><b>07</b> Progress & plan</a></nav>
+
+  <!-- 01 -->
+  <section id="listen" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">01 / HOW TO LISTEN</p><h2>Relative pitch: measure from home.</h2></div><p>You name a note by comparing it with a note you already know: the key's home note, the note before it, or an open string. Train the comparison and every note becomes recognisable.</p></div>
+    <figure class="e-figure"><div id="relativePic"></div><figcaption>How your ear names a note: hear a reference, feel the distance, name the result. The gym trains each step.</figcaption></figure>
+    <div class="fb-facts">
+      <article><h3>Sing everything</h3><p>If you can sing it, you can hear it. Hum each note after the page plays it, before you answer. It is the fastest way to connect ear and brain.</p></article>
+      <article><h3>Feel, don't calculate</h3><p>Each degree has a feeling: 1 is home, 7 aches to go up, 4 leans down. Learn the feelings in sections 02–04 and answers will come without counting.</p></article>
+      <article><h3>Little and often</h3><p>Ten minutes a day beats an hour a week. The ear improves while you sleep on it. Use the plan in section 07.</p></article>
+    </div>
+    <h3 class="sub-heading">Your anchor notes: the open strings</h3>
+    <p class="e-note">These six notes are always under your fingers. Play them until you can hum each one from memory. Mnemonic, low to high: <b>E</b>ddie <b>A</b>te <b>D</b>ynamite, <b>G</b>ood <b>B</b>ye <b>E</b>ddie.</p>
+    <div class="anchor-row" id="anchors"></div>
+  </section>
+
+  <!-- 02 -->
+  <section id="degrees" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">02 / SCALE DEGREES</p><h2>Every note has a job in the key.</h2></div><p>Play the chords of a key and your ear locks onto its home note. From then on, every other note has a <b>feeling</b> and a <b>direction</b> it wants to move. Learn these seven feelings and you can name any note in any key.</p></div>
+    <div class="scale-toolbar">
+      <label>KEY<select id="degKey"></select></label>
+      <button type="button" class="hear-button" id="degCadence">▶ Set the key (I – IV – V – I)</button>
+      <label class="e-check"><input type="checkbox" id="degWithCadence" checked> Play key first</label>
+      <label class="e-check"><input type="checkbox" id="degResolve" checked> Resolve to home</label>
+    </div>
+    <div class="deg-layout">
+      <figure class="e-figure"><div id="degLadder"></div><figcaption>Green = stable (rest here). Coral = unstable, and the arrow shows where it wants to go. Click a step to hear it.</figcaption></figure>
+      <div class="deg-cards" id="degCards"></div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section id="intervals" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">03 / INTERVALS</p><h2>The distance between two notes.</h2></div><p>An interval is measured in semitones (frets). Each one has its own colour, and the start of a famous tune to remember it by. Each card shows the interval on the neck from a C on the A string: along one string, and as the usual cross-string shape.</p></div>
+    <div class="scale-toolbar"><button type="button" class="hear-button" data-stop>■ Stop</button></div>
+    <div class="int-grid" id="intCards"></div>
+    <p class="e-note">Song hooks are memory aids: use a tune you know well. The hook marks the <b>first two notes</b> of the melody unless noted. If a hook doesn't work for you, swap in your own.</p>
+  </section>
+
+  <!-- 04 -->
+  <section id="chordsounds" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">04 / CHORD SOUNDS</p><h2>Happy, sad, tense, dreamy.</h2></div><p>Chord qualities are easier to hear than you think, because each has an emotional colour. Play each one strummed and then note by note, and listen for the word on the card.</p></div>
+    <div class="scale-toolbar"><label>ROOT<select id="chordRoot"></select></label></div>
+    <div class="chord-grid" id="chordCards"></div>
+  </section>
+
+  <!-- 05 -->
+  <section id="gym" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">05 / TRAINING GYM</p><h2>Test yourself.</h2></div><p>Pick a drill. Start at level 1. When you get <b>10 right in a row</b>, move up a level. After each answer you'll hear why: the resolution, the interval hook or the chord formula.</p></div>
+    <div class="gym-tabs" id="gymTabs" role="tablist"></div>
+    <div class="gym-panel">
+      <div class="gym-head"><div><h3 id="gymTitle"></h3><p id="gymHow"></p></div><div class="gym-score" id="gymScore"></div></div>
+      <div class="scale-toolbar gym-toolbar">
+        <label>LEVEL<select id="gymLevel"></select></label>
+        <label id="gymExtraWrap"><span id="gymExtraLabel"></span><select id="gymExtra"></select></label>
+        <button type="button" class="hear-button" id="gymPlay">▶ Play</button>
+        <button type="button" class="hear-button" id="gymRef">Reference</button>
+        <button type="button" class="hear-button is-next" id="gymNext">Next →</button>
+      </div>
+      <p class="gym-prompt" id="gymPrompt"></p>
+      <div class="gym-answers" id="gymAnswers"></div>
+      <div class="gym-feedback" id="gymFeedback" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section id="detector" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">06 / NOTE DETECTOR</p><h2>Play a note. See its name.</h2></div><p>Turn on the microphone and play (or sing) a single note. The detector names it, shows how in tune it is, and lights up every place it lives on the neck. Use it to check your answers, tune up, or explore the fretboard by ear.</p></div>
+    <div class="scale-toolbar">
+      <button type="button" class="hear-button" id="micToggle">🎤 Start microphone</button>
+      <p class="toolbar-hint" id="micStatus">The microphone is only used in this page and nothing is recorded or sent anywhere.</p>
+    </div>
+    <div class="detector">
+      <div class="det-note"><span id="detName">–</span><small id="detOctave"></small></div>
+      <div class="det-meter"><div class="det-scale"><span>♭ flat</span><span>in tune</span><span>sharp ♯</span></div><div class="det-track"><i id="detNeedle"></i></div><p id="detInfo">Waiting for sound…</p></div>
+    </div>
+    <div class="neck-scroll"><div id="detBoard"></div></div>
+    <p class="scale-legend-line"><i class="lg-root"></i> The exact note you played (every place it can be played) <i class="lg-faint"></i> Same note name in other octaves</p>
+  </section>
+
+  <!-- 07 -->
+  <section id="progress" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">07 / PROGRESS & PLAN</p><h2>Ten minutes a day.</h2></div><p>Your scores are saved in this browser. Follow the plan: a little of everything, every day, moving up a level when a drill feels easy.</p></div>
+    <div class="scale-table-wrap"><table class="interval-table stats-table" id="statsTable"></table></div>
+    <button type="button" class="hear-button" id="statsReset">Reset scores</button>
+    <div class="plan-grid">
+      <article class="song-lesson"><header><span>10</span><div><p class="eyebrow">DAILY ROUTINE · 10 MINUTES</p><h3>The session</h3></div></header><ol class="e-plan">
+        <li><b>1 min</b> · Play and hum the six open strings (section 01).</li>
+        <li><b>3 min</b> · Scale degrees drill. The most useful skill of all.</li>
+        <li><b>2 min</b> · Intervals drill, at your current level.</li>
+        <li><b>2 min</b> · Chord quality drill.</li>
+        <li><b>2 min</b> · Find it on the neck or Play it back, with your guitar in your hands.</li>
+      </ol></article>
+      <article class="song-lesson"><header><span>↑</span><div><p class="eyebrow">A 6-WEEK PATH</p><h3>What to aim for</h3></div></header><ol class="e-plan">
+        <li><b>Week 1</b> · Higher/lower level 3, scale degrees level 1, major vs minor chords.</li>
+        <li><b>Week 2</b> · Scale degrees level 2, intervals level 1.</li>
+        <li><b>Week 3</b> · Scale degrees level 3 (all seven), intervals level 2, chords level 2.</li>
+        <li><b>Week 4</b> · Find it on the neck, Play it back with the detector.</li>
+        <li><b>Week 5</b> · Intervals level 3 in all directions, chords level 3 (7ths).</li>
+        <li><b>Week 6</b> · Chromatic scale degrees and all intervals. Start working out simple melodies from songs by ear.</li>
+      </ol></article>
+    </div>
+    <div class="song-try"><b>Beyond the page</b><ul>
+      <li><b>Work out melodies:</b> pick a nursery rhyme or a chorus you know, find the first note on the guitar with the detector, then find each next note by ear.</li>
+      <li><b>Hear the bass:</b> in songs you listen to, hum the lowest note of each chord. That's the root. Find it on your low E or A string.</li>
+      <li><b>Name the key:</b> when a song ends, hum its final note. That is almost always "1", the home note.</li>
+    </ul></div>
+  </section>
+</main>
+<footer class="course-footer"><div class="page-shell"><span>GUITAR FIELD NOTES</span><a href="../theory/index.html">Music theory</a><a href="../journey/index.html">Journey</a></div></footer></body></html>

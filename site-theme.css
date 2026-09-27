@@ -1,0 +1,135 @@
+:root{color-scheme:dark;--paper:#141916;--white:#202723;--ink:#eff2e9;--muted:#adb5ab;--line:#3c4640;--green:#c8ed5c;--green-dark:#b9dc54;--coral:#ff816a;--blue:#82c6d3;--soft-blue:#263832}
+body[data-theme="light"]{color-scheme:light;--paper:#f4f2e9;--white:#fffef9;--ink:#20231f;--muted:#777a70;--line:#d8d7cc;--green:#c8ed5c;--green-dark:#8aa930;--coral:#ec7056;--blue:#5b91a1;--soft-blue:#e7eff0}
+body{background:var(--paper);color:var(--ink);font-size:16px}
+.topbar{background:rgba(20,25,22,.97)}
+body[data-theme="light"] .topbar{background:rgba(244,242,233,.97)}
+/* Keep the header navigation high-contrast in dark mode. */
+body:not([data-theme="light"]) .main-nav a{color:#e7eee5}
+body:not([data-theme="light"]) .main-nav a:hover{color:var(--green)}
+body:not([data-theme="light"]) .top-cta{color:#eff2e9;border-color:#eff2e9}
+body:not([data-theme="light"]) .top-cta:hover{background:#29312b;color:var(--green)}
+.chapter-strip,.section-tint,.footer{background:#1d2420}
+body[data-theme="light"] .chapter-strip{background:#eceae0}
+body[data-theme="light"] .section-tint{background:#e9e8de}
+body[data-theme="light"] .footer{background:#eae8de}
+.hero-art{background-color:#202a25;background-image:radial-gradient(#39473f 1px,transparent 1px)}
+body[data-theme="light"] .hero-art{background-color:#dfe9e4;background-image:radial-gradient(#b9c9c1 1px,transparent 1px)}
+.change-card{background-color:#222d27;background-image:radial-gradient(#39483f 1px,transparent 1px)}
+body[data-theme="light"] .change-card{background-color:#dfe9e4;background-image:radial-gradient(#c5d2ca 1px,transparent 1px)}
+.picking-section{background:#1c2722}
+body[data-theme="light"] .picking-section{background:#dce7e3}
+.tip-ribbon{background:#27342d}
+body[data-theme="light"] .tip-ribbon{background:#e8eee5}
+.string-wire{background:#65736a}
+body[data-theme="light"] .string-wire{background:#9eaaa5}
+.string-row strong{background:#303b31}
+body[data-theme="light"] .string-row strong{background:#e8efdd}
+.string-name,.panel-note,.body-step p,.tip-ribbon p,.hero-intro,.section-deck,.hero-meta,.art-caption,.art-bottom,.strip-inner a,.body-step h3,.chord-card .finger-note,.chord-footer,.rhythm-caption,.change-card li,.change-card .loop-count,.scale-legend,.scale-steps span,.pick-description,.routine-list small,.streak-row small,.reset-button,.song-row p,.song-note,.footer-inner>span,.level-heading>p,.lesson-topline,.lesson-hero p,.lesson-card p,.lesson-card .lesson-practice,.chord-page-hero p,.chord-back,.chord-directory-card small,.chord-count,.chord-page-heading p,.voicing-card>p,.voicing-legend,.theory-panel p,.course-footer{color:#b6c0b5}
+body[data-theme="light"] .string-name,body[data-theme="light"] .panel-note,body[data-theme="light"] .body-step p,body[data-theme="light"] .tip-ribbon p,body[data-theme="light"] .hero-intro,body[data-theme="light"] .section-deck,body[data-theme="light"] .hero-meta,body[data-theme="light"] .art-caption,body[data-theme="light"] .art-bottom,body[data-theme="light"] .strip-inner a,body[data-theme="light"] .body-step h3,body[data-theme="light"] .chord-card .finger-note,body[data-theme="light"] .chord-footer,body[data-theme="light"] .rhythm-caption,body[data-theme="light"] .change-card li,body[data-theme="light"] .change-card .loop-count,body[data-theme="light"] .scale-legend,body[data-theme="light"] .scale-steps span,body[data-theme="light"] .pick-description,body[data-theme="light"] .routine-list small,body[data-theme="light"] .streak-row small,body[data-theme="light"] .reset-button,body[data-theme="light"] .song-row p,body[data-theme="light"] .song-note,body[data-theme="light"] .footer-inner>span,body[data-theme="light"] .level-heading>p,body[data-theme="light"] .lesson-topline,body[data-theme="light"] .lesson-hero p,body[data-theme="light"] .lesson-card p,body[data-theme="light"] .lesson-card .lesson-practice,body[data-theme="light"] .chord-page-hero p,body[data-theme="light"] .chord-back,body[data-theme="light"] .chord-directory-card small,body[data-theme="light"] .chord-count,body[data-theme="light"] .chord-page-heading p,body[data-theme="light"] .voicing-card>p,body[data-theme="light"] .voicing-legend,body[data-theme="light"] .theory-panel p,body[data-theme="light"] .course-footer{color:initial}
+.progression-section{background:#1e2521}
+.progression-section .key-lab,.progression-section .minor-lab{background:#282f2b;border-color:#465149}
+.key-lab .panel-head,.minor-lab .panel-head{border-color:#465149}
+.key-lab select{background:#191f1b;border-color:#59655c;color:var(--ink)}
+.degree-chord{border-color:#465149}
+.degree-chord b{color:var(--green)}
+.key-note{background:#39443d;color:#eff2e9}
+.song-chords b{background:#303b31;color:var(--ink)}
+.song-filter.is-selected,.pick-tab.is-selected{background:var(--green);border-color:var(--green);color:#182019}
+.button-dark{background:var(--green);color:#182019}
+.button-dark:hover{background:#d8f58b}
+.metronome-display>button{color:var(--ink);border-color:var(--line)}
+.routine-list label,.body-step,.panel-head{border-color:var(--line)}
+.panel-head{color:#c5cec3}
+.small-label{color:#abb5a9}
+.reference-images figure{background:var(--white);border-color:var(--line)}
+.reference-images img{background:#fff}
+.chord-directory-card,.voicing-card,.theory-panel{background:var(--white);border-color:var(--line)}
+.outcomes-band{background:#222a25}
+.outcome-list span{background:#303934;color:var(--ink)}
+.lesson-card{background:var(--white);border-color:var(--line)}
+.lesson-visual{background:#2c3931;color:#dce7d9}
+.level-grid{border-color:var(--line)}
+.level-grid>a{border-color:var(--line)}
+.level-grid>a:hover{background:#252f29}
+.level-grid>a small,.level-grid>a span{color:#bbc4b6}
+.grade-rail,.grade-rail a{border-color:var(--line)}
+.grade-rail a.is-active{background:var(--green);color:#182019}
+.grade-stamp{background:#29312c;color:#d9e2d3}
+.grade-practice{background:#252d28}
+.grade-practice a{background:var(--green);color:#182019}
+.chord-meta-grid,.chord-meta{background:var(--white);border-color:var(--line)}
+.chord-picker select,.chord-search{background:var(--white);color:var(--ink);border-color:var(--line)}
+.chord-filter{color:#c0c8bc;border-color:var(--line)}
+.chord-filter.is-selected{background:var(--green);border-color:var(--green);color:#182019}
+.chord-directory-mark{background:#303b31;color:var(--green)}
+.chord-directory-card:hover{border-color:#829b55}
+.chord-page-hero h1 em,.lesson-hero h1 em{color:var(--green)}
+.brand-mark{color:#182019}
+.theme-toggle{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 11px var(--sans);cursor:pointer;white-space:nowrap}
+.theme-toggle:hover{border-color:var(--green-dark);background:#29312b}
+body[data-theme="light"] .theme-toggle:hover{background:#e9e8de}
+body .brand{font-size:11px}
+body .main-nav a,body .top-cta,body .button,body .song-filter,body .chord-filter,body .pick-tab,body .text-link{font-size:13px}
+body .eyebrow,body .small-label,body .panel-head,body .art-caption,body .art-caption-small,body .strip-label,body .card-kicker,body .select-label,body .scale-controls label,body .scale-steps span,body .song-tag,body .song-number,body .pick-visual-head,body .string-index{font-size:11px}
+body .hero-intro{font-size:17px}
+body .hero-meta{font-size:11px}
+body .section-heading h2{font-size:41px}
+body .section-deck{font-size:15px}
+body .strip-inner a{font-size:12px}
+body .panel-note,body .tip-ribbon p,body .body-step p,body .chord-card .finger-note,body .chord-footer,body .rhythm-caption,body .key-explain,body .minor-footnote,body .pick-description,body .song-note{font-size:12px}
+body .body-step h3{font-size:15px}
+body .chord-card .chord-quality{font-size:10px}
+body .count-row>span,body .strum-row>span,body .sound-row>span,body .change-card li{font-size:12px}
+body .change-card li span,body .change-loop .loop-count{font-size:11px}
+body .scale-controls select,body .key-lab select,body .chord-picker select,body .chord-search{font-size:13px}
+body .scale-legend,body .scale-steps strong,body .pick-beat,body .pick-string span,body .routine-list em,body .metronome-display span{font-size:11px}
+body .key-explain,body .minor-footnote{line-height:1.75}
+body .degree-chord small{font-size:10px}
+body .degree-chord b,body .routine-list b,body .streak-row b{font-size:13px}
+body .progression-beads>div>span{font-size:10px}
+body .routine-list small,body .streak-row small,body .reset-button{font-size:11px}
+body .song-row h4{font-size:14px}
+body .song-row p{font-size:11px}
+body .level-heading>p,body .lesson-hero p,body .chord-page-hero p{font-size:15px}
+body .level-grid>a span,body .grade-rail a span,body .lesson-topline,body .grade-stamp,body .grade-art-title,body .grade-art-sub,body .grade-section-heading span,body .lesson-card .lesson-index,body .chord-count,body .chord-picker label,body .chord-back{font-size:10px}
+body .level-grid>a small,body .grade-practice p,body .lesson-card p,body .lesson-card .lesson-practice,body .lesson-card a,body .outcome-list span,body .grade-pagination a,body .chord-directory-card small,body .voicing-legend,body .theory-panel p,body .chord-page-heading p{font-size:12px}
+body .lesson-card h3,body .theory-panel h3{font-size:20px}
+body .chord-directory-card strong{font-size:15px}
+body .chord-directory-mark{font-size:15px}
+body .chord-meta span{font-size:10px}
+body .chord-meta strong{font-size:19px}
+body .chord-page-heading h2{font-size:27px}
+body .voicing-card h3{font-size:17px}
+body .voicing-card>p{font-size:12px}
+body .interval-chips span{font-size:11px}
+body .voicing-diagram .voicing-degree{font-size:10px}
+body .voicing-diagram .voicing-open,body .voicing-diagram .voicing-string{font-size:11px}
+body .full-fretboard .note-label{font-size:10px}
+body .guitar-parts text{font-size:9px}
+body .course-footer,body .footer-inner>span,body .footer-inner>a:last-child{font-size:12px}
+@media(max-width:640px){
+  body{font-size:16px}
+  body .top-cta{font-size:12px}
+  body .hero h1{font-size:60px}
+  body .section-heading h2,body .level-heading h2{font-size:35px}
+  body .section-deck,body .hero-intro,body .level-heading>p,body .lesson-hero p,body .chord-page-hero p{font-size:14px}
+  body .scale-controls label,body .small-label,body .panel-head{font-size:10px}
+  body .progression-beads>div>span{font-size:9px}
+  body .resolution p{font-size:10px}
+  body .grade-rail a span{font-size:8px}
+  body .level-grid>a span,body .lesson-topline,body .grade-stamp,body .lesson-card .lesson-index{font-size:9px}
+  body .level-grid>a small,body .chord-directory-card small{font-size:10px}
+  body .lesson-card p,body .lesson-card .lesson-practice,body .theory-panel p,body .voicing-card>p{font-size:13px}
+  body .outcome-list span,body .lesson-card a,body .grade-pagination a{font-size:12px}
+  body .chord-directory-card strong{font-size:13px}
+  .theme-toggle{padding:7px 8px;font-size:10px}
+  .topbar{gap:7px}
+  .topbar .brand{font-size:10px;gap:7px}
+  .topbar .top-cta{font-size:10px;padding:6px 7px;white-space:nowrap}
+  .topbar .top-cta span{display:none}
+  .theme-toggle{font-size:9px;padding:6px 7px;gap:4px}
+  .chord-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .chord-directory-card{min-width:0}
+  .chord-directory-card>span:nth-child(2){min-width:0}
+  .chord-directory-card strong,.chord-directory-card small{overflow-wrap:anywhere}
+}

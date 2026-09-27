@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Music theory for guitar, explained with pictures: half and whole steps, the major and minor scales, chord numbers in every key, bass notes, and how to link chords with scale walks."><title>Music Theory — Guitar Field Notes</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../learning.css"><link rel="stylesheet" href="theory.css"><script src="../chords/chord-data.js" defer></script><script src="../chord-diagram.js" defer></script><script src="../fretboard.js" defer></script><script src="theory.js" defer></script></head>
+<body><header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">G</span><span>GUITAR<br>FIELD NOTES</span></a><nav class="main-nav"><a href="index.html" aria-current="page">Music theory</a><a href="../ear/index.html">Ear training</a><a href="../index.html#levels">Course path</a><a href="../chords/index.html">Chord library</a><a href="../scales/index.html">Scales & harmony</a><a href="../arpeggios/index.html">Arpeggios</a><a href="../journey/index.html">Journey</a></nav><a class="top-cta" href="../practice/index.html">Practice <span aria-hidden="true">↗</span></a></header>
+<main class="page-shell theory-page">
+  <section class="chord-page-hero theory-hero">
+    <div>
+      <p class="eyebrow">REFERENCE / MUSIC THEORY</p>
+      <h1>Chords are the places.<br><em>Scales are the roads.</em></h1>
+      <p>Music theory in pictures, for guitar. Start with the smallest step between two notes, build the major and minor scales, number the chords in any key, then use it all to <b>link chords with walking bass notes</b> so your playing moves instead of jumping.</p>
+      <p class="theory-credit">The chord-linking lessons are based on the idea taught in JustinGuitar's <a href="https://www.justinguitar.com/guitar-lessons/how-to-link-guitar-chords-using-scales-bg-1504" target="_blank" rel="noopener">How to Link Guitar Chords using Scales (BG-1504)</a>. Watch the video for Justin's own demonstration.</p>
+    </div>
+    <figure class="th-figure th-hero-art">
+      <div id="heroArt"></div>
+      <figcaption>C → G: the bass walks <b>C – B – A – G</b> down the C major scale.</figcaption>
+      <button class="hear-button" type="button" data-play-walk="hero">▶ Hear it</button>
+    </figure>
+  </section>
+
+  <nav class="scale-subnav" aria-label="On this page"><a href="#steps"><b>01</b> Steps</a><a href="#major"><b>02</b> Major scale</a><a href="#minor"><b>03</b> Minor scale</a><a href="#numbers"><b>04</b> Chord numbers</a><a href="#bass"><b>05</b> Bass notes</a><a href="#method"><b>06</b> Linking method</a><a href="#walks"><b>07</b> Walk library</a><a href="#chromatic"><b>08</b> Chromatic links</a><a href="#rhythm"><b>09</b> Rhythm</a><a href="#song"><b>10</b> In a song</a><a href="#builder"><b>11</b> Walk builder</a><a href="#practice"><b>12</b> Practice</a></nav>
+
+  <!-- 01 -->
+  <section id="steps" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">01 / HALF STEPS & WHOLE STEPS</p><h2>Twelve notes, then they repeat.</h2></div><p>All of Western music uses just 12 notes. The distance from one to the next is a <b>semitone</b> (half step, <b>S</b>). Two semitones make a <b>tone</b> (whole step, <b>T</b>). Every scale is a pattern of T and S.</p></div>
+    <div class="th-grid-2">
+      <figure class="th-figure"><div id="kbChromatic"></div><figcaption>A piano makes it visible: every key, white or black, is one semitone from the next. <b>Red</b>: C → D is a tone (a black key sits between). <b>Green</b>: E → F and B → C are semitones (no black key between).</figcaption></figure>
+      <figure class="th-figure"><div class="th-scroll" id="ladder"></div><figcaption>On guitar, <b>one fret = one semitone</b>. Here is the A string, open to fret 12.</figcaption></figure>
+    </div>
+    <div class="fb-facts">
+      <article><h3>Seven letters</h3><p><b>A B C D E F G</b>, then A again. These are the "natural" notes: the white keys.</p></article>
+      <article><h3>Two gaps are missing</h3><p>There is a sharp/flat between every pair of letters <b>except B–C and E–F</b>. Those pairs are only a semitone apart. This one fact explains every scale shape.</p></article>
+      <article><h3>Sharps and flats</h3><p>The note between A and B is <b>A#</b> (A raised) or <b>B♭</b> (B lowered): same sound, two names. Use whichever keeps each letter once in the scale.</p></article>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="major" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">02 / THE MAJOR SCALE</p><h2>T – T – S – T – T – T – S</h2></div><p>Start on any note and take these seven steps and you get that note's major scale. From C it uses only white keys: <b>C D E F G A B C</b>. The semitones fall on <b>3→4</b> and <b>7→8</b>.</p></div>
+    <div class="th-grid-2">
+      <figure class="th-figure"><div id="stairMajor"></div><figcaption>The staircase: tall risers are tones, short risers are semitones.</figcaption></figure>
+      <figure class="th-figure"><div id="kbMajor"></div><figcaption>C major on the keyboard, with each step labelled.</figcaption></figure>
+    </div>
+    <div class="scale-toolbar th-toolbar">
+      <label>KEY<select id="majorKey"></select></label>
+      <button class="hear-button" type="button" id="majorPlay">▶ Play scale</button>
+      <p class="toolbar-hint">Change the key: the pattern stays the same and only the note names change.</p>
+    </div>
+    <figure class="th-figure"><div class="th-scroll" id="majorNeck"></div><figcaption id="majorNeckCaption"></figcaption></figure>
+    <p class="scale-legend-line"><i class="lg-root"></i> Root <i class="lg-note"></i> Scale note <i class="lg-zone"></i> Bass zone: strings E, A, D, frets 0–5, where most chord links happen</p>
+  </section>
+
+  <!-- 03 -->
+  <section id="minor" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">03 / THE NATURAL MINOR SCALE</p><h2>T – S – T – T – S – T – T</h2></div><p>The minor scale moves the semitones: <b>2→3</b> and <b>5→6</b>. A minor uses the same notes as C major (its <b>relative major</b>), starting from A: <b>A B C D E F G A</b>.</p></div>
+    <div class="th-grid-2">
+      <figure class="th-figure"><div id="stairMinor"></div><figcaption>A natural minor. Notice the short riser right after the first step.</figcaption></figure>
+      <figure class="th-figure"><div id="kbMinor"></div><figcaption>A minor: all white keys again, just starting on A.</figcaption></figure>
+    </div>
+    <h3 class="sub-heading">Why this matters for linking chords</h3>
+    <div class="th-grid-2">
+      <figure class="th-figure"><div id="cmpMajor"></div><figcaption><b>Major:</b> G → C walks G–A–B, <b>tone, tone</b>, then a semitone into C.</figcaption></figure>
+      <figure class="th-figure"><div id="cmpMinor"></div><figcaption><b>Minor:</b> Am → C walks A–B–C, a <b>tone, then a semitone</b>.</figcaption></figure>
+    </div>
+    <p class="th-note">Walks between major chords often step in whole tones. Walks that start on a minor chord often go <b>tone then semitone</b>, because in the minor scale the half step comes straight after the root. You don't need to memorise this: follow the scale and the steps come out right.</p>
+  </section>
+
+  <!-- 04 -->
+  <section id="numbers" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">04 / THE CHORD NUMBERING SYSTEM</p><h2>Every key has the same seven chords.</h2></div><p>Build a chord on each note of the scale and you get seven chords. Name them with Roman numerals (<b>UPPER = major</b>, <b>lower = minor</b>, ° = diminished) and a progression becomes a pattern you can move to any key. Country and bluegrass players call chords by number all the time.</p></div>
+    <div class="th-grid-2">
+      <figure class="th-figure"><div id="numberPattern"></div><figcaption>The pattern for every major key (top) and every natural minor key (bottom).</figcaption></figure>
+      <figure class="th-figure"><div id="stackPic"></div><figcaption>Where the chords come from: stack every other scale note (1–3–5) on each degree.</figcaption></figure>
+    </div>
+    <div class="scale-toolbar th-toolbar">
+      <label>MODE<select id="numMode"><option value="major">Major keys</option><option value="minor">Minor keys</option></select></label>
+      <label>PROGRESSION<select id="numProg"></select></label>
+      <p class="toolbar-hint">Click a key row to hear its progression. Click a chord name to open it in the chord library.</p>
+    </div>
+    <div class="scale-table-wrap th-scroll"><table class="interval-table num-table" id="numTable"></table></div>
+    <div class="num-result" id="numResult"></div>
+    <div class="fb-facts">
+      <article><h3>Example (key of G)</h3><p>G major is <b>G A B C D E F#</b>. So the <b>IV</b> chord is C major, the <b>vi</b> chord is E minor and the <b>ii</b> chord is A minor.</p></article>
+      <article><h3>Relative keys share chords</h3><p>A minor's chords (Am Bdim C Dm Em F G) are C major's chords starting from vi. The <b>vi of a major key is the i of its relative minor</b>.</p></article>
+      <article><h3>Numbers make walks easy</h3><p>I → V, IV → I, vi → IV… once you know the key, you know which scale to walk: <b>the key's scale</b>. Every chord in the table is built from it.</p></article>
+    </div>
+    <figure class="th-figure th-circle-fig"><div id="circle"></div><figcaption id="circleCaption">The circle of fifths. Click a key: its I, IV and V (and the relative minor) light up. Neighbouring keys share six of seven notes.</figcaption></figure>
+  </section>
+
+  <!-- 05 -->
+  <section id="bass" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">05 / BASS NOTES</p><h2>Every chord stands on its root.</h2></div><p>The lowest note you strum is the <b>bass note</b>. In open chords it is normally the <b>root</b>, the note that names the chord. Linking chords means joining these bass notes, so you need to know exactly where each one sits.</p></div>
+    <div class="chord-strip" id="bassBoxes"></div>
+    <p class="scale-legend-line"><i class="lg-root"></i> Root (bass note of the chord) · × = don't play the string · ○ = open string</p>
+    <figure class="th-figure"><div class="th-scroll" id="bassMap"></div><figcaption>The bass notes of the open chords above, all within the first five frets of the E, A and D strings.</figcaption></figure>
+    <div class="fb-facts">
+      <article><h3>Low E string (6th)</h3><p><b>E</b> (open) – E, Em · <b>G</b> (3rd fret) – G · <b>F</b> (1st fret) – full F barre</p></article>
+      <article><h3>A string (5th)</h3><p><b>A</b> (open) – A, Am, A7 · <b>B</b> (2nd fret) – B7 · <b>C</b> (3rd fret) – C</p></article>
+      <article><h3>D string (4th)</h3><p><b>D</b> (open) – D, Dm, D7 · <b>F</b> (3rd fret) – small F</p></article>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section id="method" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">06 / THE LINKING METHOD</p><h2>Join the dots with scale notes.</h2></div><p>A bass walk is a tiny melody in the low strings that leads the ear from one chord's root to the next. You play one or two notes of the scale between the chords, so the change sounds planned instead of abrupt.</p></div>
+    <ol class="lead-steps">
+      <li><span>1</span><div><h3>Find both bass notes</h3><p>Where does the chord you're on start, and where does the next one start? C → G means <b>C</b> (A string, 3rd fret) to <b>G</b> (low E, 3rd fret).</p></div></li>
+      <li><span>2</span><div><h3>List the scale notes between</h3><p>Use the key's scale. Between C and G going down in C major: <b>B, A</b>. Those are your linking notes, usually two of them.</p></div></li>
+      <li><span>3</span><div><h3>Pick the shorter direction</h3><p>Down from C to G is 2 notes; up is 4 (D E F G). Take the short road, which usually means the lower G the chord uses anyway.</p></div></li>
+      <li><span>4</span><div><h3>Play in time, land on beat 1</h3><p>Strum the first chord, play the linking notes on the last beats of the bar, and hit the new chord <b>exactly on beat 1</b>. The walk leads there; don't be late.</p></div></li>
+    </ol>
+    <div class="th-grid-2">
+      <figure class="th-figure"><div id="flow"></div><figcaption>The decision in one picture.</figcaption></figure>
+      <div class="th-stack">
+        <figure class="th-figure"><div id="dirDown"></div><figcaption><b>Down:</b> C – B – A – G. Two linking notes. ✓</figcaption></figure>
+        <figure class="th-figure"><div id="dirUp"></div><figcaption><b>Up:</b> C – D – E – F – G. Four notes, and it ends on the wrong G. ✗</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section id="walks" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">07 / WALK LIBRARY</p><h2>The links worth learning first.</h2></div><p>Each card shows both chord shapes, the path on the neck, the notes with their steps, and the tab. Press play: first chord → walk → new chord on beat 1.</p></div>
+    <div class="scale-toolbar th-toolbar">
+      <label>TEMPO<select class="tempo-select"><option value="66">66 BPM · learning</option><option value="84" selected>84 BPM</option><option value="100">100 BPM</option></select></label>
+      <button class="hear-button" type="button" data-stop>■ Stop</button>
+    </div>
+    <p class="scale-legend-line"><i class="lg-root"></i> Start bass note <i class="lg-note"></i> Scale linking note <i class="lg-chrom"></i> Chromatic note <i class="lg-end"></i> New chord's bass note</p>
+    <div class="walk-grid" id="walkLibrary"></div>
+  </section>
+
+  <!-- 08 -->
+  <section id="chromatic" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">08 / CHROMATIC LINKS</p><h2>When the scale has nothing in between.</h2></div><p>Some chords are too close together: G to A is a single tone and the scale has no note between them. Then you walk <b>chromatically</b>, fret by fret, even through a note that isn't in the key. It works because the passing note is short and leads straight to a strong note.</p></div>
+    <figure class="th-figure"><div id="chromPic"></div><figcaption>Scale walk vs chromatic walk from C to A: the chromatic version adds B♭, a note outside C major, as a stepping stone.</figcaption></figure>
+    <div class="walk-grid" id="walkChromatic"></div>
+    <p class="th-note">Rule of thumb: <b>chromatic notes go on weak beats and never stay</b>. A passing B♭ lasting one beat sounds bluesy and intentional; the same note held for a bar sounds like a mistake.</p>
+  </section>
+
+  <!-- 09 -->
+  <section id="rhythm" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">09 / RHYTHM & TIMING</p><h2>Count it, then walk it.</h2></div><p>The notes are the easy part. The skill is keeping time: the strumming and the walk share one bar, and the new chord must arrive on beat 1 of the next bar. Here are four ways to fit a walk into a bar of 4/4.</p></div>
+    <div class="th-grid-2" id="rhythmGrids"></div>
+    <div class="fb-facts">
+      <article><h3>Practise it apart first</h3><p>Many students find it hard to keep the strum going while fretting single notes. Loop just the walk notes with a metronome, then add the chords.</p></article>
+      <article><h3>Pick, don't strum</h3><p>Play the linking notes with a single down-stroke each (or alternate down–up for eighth notes). Aim the pick at one string only.</p></article>
+      <article><h3>Swing or straight?</h3><p>If the song swings, the walk swings too. Practise a swing feel on muted strings before combining it with links.</p></article>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="song" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">10 / IN A SONG</p><h2>I – vi – IV – V, fully linked.</h2></div><p>The classic progression in G (G – Em – C – D) with a link into every chord. Each link uses a different tool: a one-note scale step, a shortened walk, a chromatic step and a three-note walk.</p></div>
+    <div class="scale-toolbar th-toolbar">
+      <label>TEMPO<select class="tempo-select"><option value="66">66 BPM · learning</option><option value="84" selected>84 BPM</option><option value="100">100 BPM</option></select></label>
+      <button class="hear-button" type="button" id="songPlay">▶ Play the progression</button>
+      <button class="hear-button" type="button" data-stop>■ Stop</button>
+    </div>
+    <div class="song-chips" id="songChips"></div>
+    <div class="tab-scroll song-tab th-tab-box" id="songTab"></div>
+    <div class="song-links" id="songLinks"></div>
+  </section>
+
+  <!-- 11 -->
+  <section id="builder" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">11 / WALK BUILDER</p><h2>Find the link between any two chords.</h2></div><p>Choose a key and two open chords from it. The builder finds both bass notes, lists the scale notes between them, and falls back to a chromatic walk (or a shortened walk) when needed.</p></div>
+    <div class="scale-toolbar th-toolbar">
+      <label>KEY<select id="bKey"></select></label>
+      <label>FROM<select id="bFrom"></select></label>
+      <button class="hear-button" type="button" id="bSwap" aria-label="Swap chords">⇄</button>
+      <label>TO<select id="bTo"></select></label>
+      <label class="th-check"><input type="checkbox" id="bChrom"> Chromatic</label>
+      <label>TEMPO<select class="tempo-select"><option value="66">66 BPM</option><option value="84" selected>84 BPM</option><option value="100">100 BPM</option></select></label>
+    </div>
+    <div id="builderOut"></div>
+  </section>
+
+  <!-- 12 -->
+  <section id="practice" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">12 / PRACTICE</p><h2>Make it automatic.</h2></div><p>A week-long plan, the mistakes to watch for, and how to make links part of your normal playing.</p></div>
+    <div class="th-grid-2">
+      <article class="song-lesson">
+        <header><span>7</span><div><p class="eyebrow">ONE WEEK · 10 MINUTES A DAY</p><h3>Practice plan</h3></div></header>
+        <ol class="th-plan">
+          <li><b>Day 1</b> · Say the notes of C major and G major out loud while playing them on the A and low E strings.</li>
+          <li><b>Day 2</b> · C → G and G → C only. Slow, with a metronome at 60–66 BPM.</li>
+          <li><b>Day 3</b> · Add A → D and D → A. Notice C# (a note outside C major) now belongs.</li>
+          <li><b>Day 4</b> · Minor walks: Am → C, Em → G. Feel the tone–semitone.</li>
+          <li><b>Day 5</b> · Chromatic links: G → Am, C → D, D → E.</li>
+          <li><b>Day 6</b> · Play section 10 (G–Em–C–D) all the way through without stopping.</li>
+          <li><b>Day 7</b> · Pick a song you know. Add <b>one</b> link per verse, at the most important chord change.</li>
+        </ol>
+      </article>
+      <article class="song-lesson">
+        <header><span>!</span><div><p class="eyebrow">WATCH FOR THESE</p><h3>Common mistakes</h3></div></header>
+        <ul class="th-plan">
+          <li><b>Landing late.</b> The walk exists to lead the ear to beat 1. If the new chord comes late, drop to a single linking note.</li>
+          <li><b>Too many links.</b> A walk into every chord gets busy. Save them for the ends of phrases and section changes.</li>
+          <li><b>Wrong direction.</b> Walking up C–D–E–F–G ends on a G that is too high and takes too long. Choose the short road.</li>
+          <li><b>Notes ringing together.</b> Lift the previous finger as you play the next note, so the walk sounds like a line, not a smear.</li>
+          <li><b>Losing the strum.</b> Keep your strumming hand moving through the walk (miss the strings on the up-strokes) so you don't lose the beat.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="song-try"><b>Going further</b><ul>
+      <li><b>Alternate bass chords</b> like C/G (C with G in the bass) give you new starting points: from C/G the bass steps straight down G → F into an F barre chord.</li>
+      <li><b>Approach notes</b>: a single note one fret below the target root (B → C, F# → G, G# → A) is the smallest possible link.</li>
+      <li><b>Learn the neck</b>: every walk you work out teaches you note names on the bass strings. Experimenting is the point.</li>
+      <li>Explore the scales further on the <a href="../scales/index.html">Scales & harmony</a> page, and the chord shapes in the <a href="../chords/index.html">Chord library</a>.</li>
+    </ul></div>
+    <p class="theory-credit">Sources: JustinGuitar, <a href="https://www.justinguitar.com/guitar-lessons/how-to-link-guitar-chords-using-scales-bg-1504" target="_blank" rel="noopener">How to Link Guitar Chords using Scales</a>, and the <a href="https://community.justinguitar.com/t/how-to-link-guitar-chords-using-scales/4158" target="_blank" rel="noopener">community discussion</a>. The tabs and diagrams on this page follow standard theory; the lesson's own examples may differ.</p>
+  </section>
+</main>
+<footer class="course-footer"><div class="page-shell"><span>GUITAR FIELD NOTES</span><a href="../scales/index.html">Scales & harmony</a><a href="../chords/index.html">Chord library</a></div></footer></body></html>

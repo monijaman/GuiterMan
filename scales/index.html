@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Learn the guitar fretboard, play every common scale in any key, see the chords each scale makes, and turn a scale into lead guitar lines."><title>Scales & Harmony — Guitar Field Notes</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../learning.css"><script src="../chords/chord-data.js" defer></script><script src="../chord-diagram.js" defer></script><script src="../fretboard.js" defer></script><script src="scales.js" defer></script><script src="progressions.js" defer></script><script src="song.js" defer></script></head>
+<body><header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">G</span><span>GUITAR<br>FIELD NOTES</span></a><nav class="main-nav"><a href="../theory/index.html">Music theory</a><a href="../ear/index.html">Ear training</a><a href="../index.html#levels">Course path</a><a href="../chords/index.html">Chord library</a><a href="index.html" aria-current="page">Scales & harmony</a><a href="../arpeggios/index.html">Arpeggios</a><a href="../journey/index.html">Journey</a></nav><a class="top-cta" href="../practice/index.html">Practice <span aria-hidden="true">↗</span></a></header>
+<main class="page-shell scales-page">
+  <section class="chord-page-hero scales-hero">
+    <div><p class="eyebrow">REFERENCE / SCALES & HARMONY</p><h1>The scale is the map.<br><em>Lead is the route.</em></h1><p>Learn where the notes live, see any scale across the whole neck, find the chords a scale makes, then use it to build real lead lines, one step at a time.</p></div>
+  </section>
+  <nav class="scale-subnav" aria-label="On this page"><a href="#fretboard"><b>01</b> The fretboard</a><a href="#scales"><b>02</b> Scales</a><a href="#harmony"><b>03</b> Harmony</a><a href="#progressions"><b>04</b> Progressions</a><a href="#lead"><b>05</b> Make a lead</a><a href="#song"><b>06</b> Make a song</a></nav>
+
+  <section id="fretboard" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">01 / THE FRETBOARD</p><h2>Every fret is one semitone.</h2></div><p>Open strings from low to high: <b>E A D G B E</b>. Each fret raises the pitch by a half step; 12 frets later the notes repeat an octave higher.</p></div>
+    <div class="fb-facts">
+      <article><h3>Natural notes</h3><p>A B C D E F G. Between every pair there is a sharp/flat <b>except B–C and E–F</b>, which sit one fret apart.</p></article>
+      <article><h3>Markers</h3><p>Dots at frets <b>3 5 7 9</b> and a double dot at <b>12</b>. On the low E string they are G, A, B, C# — learn those four and you can find the rest.</p></article>
+      <article><h3>Octave shapes</h3><p>Same note, higher: <b>two strings up, two frets up</b> (from string 6 or 5), or <b>three frets up</b> when you cross the B string.</p></article>
+    </div>
+    <div class="scale-toolbar">
+      <label>SHOW<select id="fbMode"><option value="natural">Natural notes</option><option value="all">All notes</option><option value="find">One note everywhere</option></select></label>
+      <label id="fbNoteWrap" hidden>NOTE<select id="fbNote"></select></label>
+      <p class="toolbar-hint">C is marked in coral as a landmark. Click any dot to hear it.</p>
+    </div>
+    <div class="neck-scroll"><div id="fbBoard"></div></div>
+    <article class="quiz-panel">
+      <div><p class="eyebrow">NOTE-FINDER QUIZ</p><h3 id="quizPrompt">Press start</h3><p id="quizFeedback" aria-live="polite">Find the note on the string named. Tap the fret on the neck below.</p></div>
+      <div class="quiz-side"><strong id="quizScore">0 / 0</strong><button id="quizStart" class="hear-button" type="button">Start quiz</button></div>
+    </article>
+    <div class="neck-scroll quiz-board" id="quizBoardWrap" hidden><div id="quizBoard"></div></div>
+  </section>
+
+  <section id="scales" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">02 / SCALES</p><h2>Light up any scale.</h2></div><p>A scale is a set of notes chosen from the 12. Pick a key and a scale, then learn it one position (a hand-sized box) at a time.</p></div>
+    <div class="scale-toolbar">
+      <label>KEY<select id="scRoot"></select></label>
+      <label>SCALE<select id="scType"></select></label>
+      <label>VIEW<select id="scPosition"></select></label>
+      <label>LABELS<select id="scLabels"><option value="note">Note names</option><option value="degree">Scale degrees</option></select></label>
+      <button id="scPlay" class="hear-button" type="button">▶ Play scale</button>
+    </div>
+    <div class="scale-summary" id="scSummary"></div>
+    <div class="neck-scroll"><div id="scBoard"></div></div>
+    <p class="scale-legend-line"><i class="lg-root"></i> Root <i class="lg-note"></i> Scale note <i class="lg-faint"></i> Same scale, outside this position</p>
+    <div class="scale-cards" id="scCards"></div>
+  </section>
+
+  <section id="harmony" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">03 / HARMONY</p><h2>Chords grow out of scales.</h2></div><p>Start on any scale note and stack every other note (1–3–5, then 7). Each degree gives one chord. Click a chord to see its shapes.</p></div>
+    <div id="harmonyBody"></div>
+    <h3 class="sub-heading">Which scale over which chord?</h3>
+    <div class="scale-table-wrap"><table class="interval-table match-table"><thead><tr><th>Chord / situation</th><th>Safe choice</th><th>More colour</th><th>Why</th></tr></thead><tbody>
+      <tr><td>Major chord or major key (C, G…)</td><td>Major pentatonic</td><td>Major scale (Ionian), Lydian</td><td>Contains the 1, 3 and 5 with no clashing 4th.</td></tr>
+      <tr><td>Minor chord or minor key (Am, Em…)</td><td>Minor pentatonic</td><td>Natural minor (Aeolian), Dorian</td><td>Contains 1, b3, 5; Dorian's natural 6 sounds brighter.</td></tr>
+      <tr><td>Dominant 7 / blues (A7, E7…)</td><td>Minor pentatonic + blues note</td><td>Mixolydian, mixing major and minor pentatonic</td><td>The b3 against the chord's 3 is the classic blues rub.</td></tr>
+      <tr><td>V7 going to a minor chord (E7 → Am)</td><td>Harmonic minor</td><td>Phrygian dominant</td><td>Its raised 7th (G#) is the 3rd of E7 and pulls up to A.</td></tr>
+      <tr><td>m7b5 (Bm7b5)</td><td>Locrian</td><td>Locrian natural 2</td><td>Matches the chord's b5.</td></tr>
+      <tr><td>A whole-song solo in one key</td><td>The key's pentatonic</td><td>The key's full major/minor scale</td><td>Every diatonic chord shares most of its notes.</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section id="progressions" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">04 / PROGRESSIONS OVER A SCALE</p><h2>One scale, many chords.</h2></div><p>A progression is a path through the chords of a key. Because those chords are built from the key's scale, <b>one scale fits the whole progression</b>. Over each chord, though, some of its notes are safe landing spots and some are not. Here's how to tell.</p></div>
+
+    <div class="fb-facts">
+      <article><h3>1 · Chords come from the scale</h3><p>Stack thirds on each note of the key's scale and you get its seven chords (see <a href="#harmony">Harmony</a>). A progression just picks some of them, in an order.</p></article>
+      <article><h3>2 · Each chord has a job</h3><p><b class="fn-t">Tonic</b> = home, at rest. <b class="fn-s">Subdominant</b> = moving away. <b class="fn-d">Dominant</b> = tension that wants home. Most progressions cycle T → S → D → T.</p></article>
+      <article><h3>3 · Same scale, new centre</h3><p>The scale doesn't change, but each chord makes different notes feel stable. Over Dm in C major the C major scale sounds like <b>D Dorian</b>. The <b>chord tones</b> are always the safest notes.</p></article>
+    </div>
+
+    <div class="scale-toolbar">
+      <label>KEY<select id="pgKey"></select></label>
+      <label>PROGRESSION<select id="pgProgression"></select></label>
+      <label>SCALE TO SOLO WITH<select id="pgScale"></select></label>
+      <label>POSITION<select id="pgPosition"></select></label>
+      <label>TEMPO<select id="pgTempo"><option value="72">72 BPM</option><option value="88" selected>88 BPM</option><option value="108">108 BPM</option></select></label>
+    </div>
+    <div class="scale-toolbar">
+      <button id="pgBacking" class="hear-button" type="button">▶ Backing track</button>
+      <button id="pgDemo" class="hear-button" type="button">▶ Backing + demo solo</button>
+      <button id="pgStop" class="hear-button" type="button">■ Stop</button>
+      <p class="toolbar-hint" id="pgAbout"></p>
+    </div>
+
+    <div class="pg-degrees" id="pgDegrees"></div>
+    <div class="pg-timeline" id="pgTimeline"></div>
+    <div class="neck-scroll"><div id="pgBoard"></div></div>
+    <p class="scale-legend-line"><i class="lg-root"></i> Key root <i class="lg-note"></i> Scale note <i class="lg-target"></i> Chord tone of the selected bar (land here) <i class="lg-outside"></i> Chord tone the scale doesn't have <i class="lg-faint"></i> Scale outside this position</p>
+
+    <article class="song-lesson pg-analysis" id="pgAnalysis"></article>
+    <h3 class="sub-heading">Demo solo · targets on beat 1, scale steps between</h3>
+    <div class="tab-scroll song-tab" id="pgTab"></div>
+
+    <ol class="lead-steps pg-rules">
+      <li><span>1</span><div><h3>Start with one scale for the whole progression</h3><p>If every chord is from the key, the key's scale (or its pentatonic) works over all of it. That's your safety net.</p></div></li>
+      <li><span>2</span><div><h3>Then follow the chords inside the scale</h3><p>Aim for the current chord's tones on strong beats. Same scale, but the melody now <b>describes each chord</b>. It sounds like you're playing the changes, not just the key.</p></div></li>
+      <li><span>3</span><div><h3>Treat "avoid" notes as passing notes</h3><p>A scale note a half step above a chord tone (like F over C major) clashes if held. Use it on the way to a chord tone, not to rest on.</p></div></li>
+      <li><span>4</span><div><h3>When a chord leaves the key, adjust one note</h3><p>Borrowed or altered chords (E7 in A minor, Bb in C major) contain a note the scale lacks. Change just that note while the chord lasts, e.g. G → G# over E7: harmonic minor.</p></div></li>
+    </ol>
+  </section>
+
+  <section id="lead" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">05 / MAKE A LEAD</p><h2>From scale to solo in six steps.</h2></div><p>A scale is only a list of notes. A lead line is choosing <em>which</em> notes, <em>when</em>, and <em>how</em> you play them. Here is a method you can use today.</p></div>
+    <div class="scale-toolbar lead-toolbar">
+      <label>SOLO KEY<select id="leadKey"></select></label>
+      <label>TEMPO<select id="leadTempo"><option value="70">70 BPM</option><option value="84" selected>84 BPM</option><option value="100">100 BPM</option></select></label>
+      <button id="jamButton" class="hear-button" type="button">▶ Start jam track</button>
+      <p class="toolbar-hint" id="jamInfo"></p>
+    </div>
+    <div class="jam-chords" id="jamChords"></div>
+    <div class="neck-scroll"><div id="leadBoard"></div></div>
+    <p class="scale-legend-line"><i class="lg-root"></i> Root <i class="lg-note"></i> Scale note <i class="lg-target"></i> Chord tone of the chord now playing: land here <i class="lg-blue"></i> Blue note (passing only)</p>
+
+    <ol class="lead-steps">
+      <li><span>1</span><div><h3>Pick one box and stay there</h3><p>Use <b>position 1 of the minor pentatonic</b> (highlighted above). Five notes, two per string, no wrong notes against the jam track. Play it up and down with alternate picking until it feels automatic.</p></div></li>
+      <li><span>2</span><div><h3>Aim for chord tones</h3><p>Start the jam track. The ringed notes change with each chord: those are the chord's own notes. <b>End phrases and hit beat 1 on a ringed note</b>; use the other scale notes to travel between them. This is the single biggest step from "running scales" to "playing changes".</p></div></li>
+      <li><span>3</span><div><h3>Make a short motif</h3><p>Choose 3–4 notes and a simple rhythm. Play it, then <b>repeat it</b>, <b>shift it</b> to start on a different scale note, or <b>change only the rhythm</b>. Listeners remember repetition; random notes sound like an exercise.</p></div></li>
+      <li><span>4</span><div><h3>Ask and answer</h3><p>Play a phrase that ends on a <b>non-root</b> note (a question, e.g. the 5th or b7), rest, then a phrase that ends on the <b>root</b> (the answer). Leave as much space as you play; silence is part of the line.</p></div></li>
+      <li><span>5</span><div><h3>Add expression</h3><p><b>Bend</b> the 4th up to the 5th, or the b7 up to the root. <b>Slide</b> into a note from a fret below. <b>Hammer-on / pull-off</b> between the two notes on a string. Add <b>vibrato</b> to long notes. The same notes sound far more vocal.</p></div></li>
+      <li><span>6</span><div><h3>Grow the map</h3><p>Connect position 1 to position 2 by sliding up a string. Add the <b>blue note</b> (b5) as a passing tone. Then swap to the full natural minor or Dorian to get the missing 2nd and 6th.</p></div></li>
+    </ol>
+
+    <h3 class="sub-heading">Licks that use these steps · click ▶ to hear, watch the neck</h3>
+    <div class="lick-grid" id="licks"></div>
+
+    <article class="theory-panel practice-routine"><h3>A 15-minute lead routine</h3><ul class="tip-list">
+      <li><b>3 min</b> · Play the box up and down with a metronome, saying the note names.</li>
+      <li><b>3 min</b> · With the jam track, play only chord tones, one per beat.</li>
+      <li><b>4 min</b> · Learn one lick above, then change its rhythm or ending note.</li>
+      <li><b>5 min</b> · Improvise with the jam track: two bars playing, two bars resting.</li>
+    </ul></article>
+  </section>
+
+  <section id="song" class="scale-section">
+    <div class="chord-page-heading"><div><p class="eyebrow">06 / MAKE A SONG</p><h2>Chords + arpeggios + lead = a song.</h2></div><p>Five practical lessons that build one complete piece. Every part uses the same four chords, played three different ways. Choose a key and a progression; everything below updates, and every part can be played.</p></div>
+    <div class="scale-toolbar">
+      <label>KEY<select id="songKey"></select></label>
+      <label>PROGRESSION<select id="songProgression"></select></label>
+      <label>TEMPO<select id="songTempo"><option value="72">72 BPM · learning</option><option value="88" selected>88 BPM</option><option value="104">104 BPM</option></select></label>
+      <button id="songStop" class="hear-button" type="button">■ Stop</button>
+    </div>
+
+    <article class="song-lesson">
+      <header><span>1</span><div><p class="eyebrow">LESSON 1 · CHORDS</p><h3>Choose four chords from one key</h3></div></header>
+      <p id="songChordIntro"></p>
+      <div class="workshop-chords" id="workshopChords"></div>
+      <div class="song-try"><b>Try this</b><ul><li>Hold each chord and pick every string once. Fix buzzing notes before moving on.</li><li>Change chords on beat 1 while counting "1 2 3 4" out loud. Slow is fine; stopping is not.</li><li>Find the <b>common notes</b> between neighbouring chords (shown in each card). Fingers that can stay put, should.</li></ul></div>
+    </article>
+
+    <article class="song-lesson">
+      <header><span>2</span><div><p class="eyebrow">LESSON 2 · RHYTHM PART</p><h3>Strum a pattern that drives the song</h3></div><button class="hear-button" type="button" data-part="strum">▶ Play strum part</button></header>
+      <p>Count eighth notes: <b>1 & 2 & 3 & 4 &</b>. Your hand moves down on the numbers and up on the "&" <em>all the time</em>, even when it misses the strings. That constant motion is what keeps the rhythm steady. The pattern below hits the strings on <b>D · D U · U D U</b>.</p>
+      <div class="strum-grid" id="strumGrid"></div>
+      <div class="song-try"><b>Try this</b><ul><li>Mute the strings with your fretting hand and play the pattern only: rhythm first, chords later.</li><li>Accent beat 2 and 4 slightly (the backbeat): it instantly sounds more like a band.</li><li>For a quieter verse, strum only beats 1 and 3; save the full pattern for the chorus.</li></ul></div>
+    </article>
+
+    <article class="song-lesson">
+      <header><span>3</span><div><p class="eyebrow">LESSON 3 · ARPEGGIOS</p><h3>Pick the same chords one note at a time</h3></div><button class="hear-button" type="button" data-part="arp">▶ Play arpeggio part</button></header>
+      <p>An arpeggio is a chord played note by note. Hold the full chord shape, pick the <b>bass note</b> (the chord's root) on beat 1, then walk up and down the top strings: <b>bass – G – B – e – B – G – B – G</b>. Let every note ring. This is the classic intro and verse sound.</p>
+      <div class="tab-scroll song-tab" id="arpTab"></div>
+      <div class="song-try"><b>Try this</b><ul><li>Keep your picking hand anchored lightly on the bridge; only the pick moves.</li><li>Fingerstyle version: thumb plays the bass string, index–middle–ring play G–B–e.</li><li>Arpeggios show you <b>where the chord tones are</b>, and these are exactly the notes the lead will aim for in Lesson 4.</li></ul></div>
+    </article>
+
+    <article class="song-lesson">
+      <header><span>4</span><div><p class="eyebrow">LESSON 4 · LEAD MELODY</p><h3>Write a lead line from chord tones</h3></div><button class="hear-button" type="button" data-part="lead">▶ Play lead over chords</button></header>
+      <p>The rule: <b>on beat 1 of each bar, play a note that belongs to that bar's chord</b>. Between those targets, <b>step</b> through neighbouring scale notes to reach the next target. That's how the melody below was built. It stays in one box of the scale and sounds "right" because it follows the chords.</p>
+      <div class="target-row" id="targetRow"></div>
+      <div class="tab-scroll song-tab" id="leadTab"></div>
+      <div class="neck-scroll"><div id="songBoard"></div></div>
+      <p class="scale-legend-line"><i class="lg-root"></i> Key's root <i class="lg-note"></i> Scale note in this box <i class="lg-target"></i> Target notes used on beat 1</p>
+      <div class="song-try"><b>Try this</b><ul><li>Play only the four target notes, one per bar, over the strum part. You already have a melody.</li><li>Change the rhythm of the in-between notes, but keep the targets on beat 1.</li><li>Swap a target for another note of the same chord (the ringed dots) and hear how the mood changes.</li><li>Sing the line first, then find it: a singable melody is a good melody.</li></ul></div>
+    </article>
+
+    <article class="song-lesson">
+      <header><span>5</span><div><p class="eyebrow">LESSON 5 · ARRANGEMENT</p><h3>Put the parts together into a song</h3></div><button class="hear-button" type="button" data-part="song">▶ Play the whole song</button></header>
+      <p>A song is these same four bars, dressed differently in each section. Contrast keeps it interesting: <b>quiet → full → featured → quiet</b>.</p>
+      <div class="song-form" id="songForm"></div>
+      <div class="song-try"><b>Write your own</b><ul><li><b>Change one thing at a time:</b> keep the chords, write a new lead from different targets; or keep the lead and try another progression.</li><li><b>Add a chorus:</b> use a different progression from the same key (e.g. start on the IV chord) and strum harder.</li><li><b>Lyrics:</b> sing the lead melody with words; repeat the strongest line at the end of each chorus.</li><li><b>Record it:</b> phone-record the rhythm part, then play the arpeggio and lead over your own recording.</li></ul></div>
+    </article>
+  </section>
+</main>
+<footer class="course-footer"><div class="page-shell"><span>GUITAR FIELD NOTES</span><a href="../chords/index.html">Chord library</a><a href="../index.html#levels">Course path</a></div></footer></body></html>

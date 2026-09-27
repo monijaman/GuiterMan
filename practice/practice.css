@@ -1,0 +1,25 @@
+/* Practice page: layouts not shared with the scales and arpeggio pages. */
+#motifCards,#phraseCards,#melodyCards,#rhythmCards,#jobCards{margin-top:14px}
+#soloCards{grid-template-columns:1fr;margin-top:14px}
+.melody-steps .jam-chords button{min-width:130px}
+.pr-facts-top{margin:16px 0 0}
+.pr-arc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pr-arc article{padding:14px 16px;border:1px solid var(--line);border-top:3px solid var(--green);background:var(--white)}
+.pr-arc article:nth-child(2){border-top-color:var(--blue)}
+.pr-arc article:nth-child(3){border-top-color:var(--coral)}
+.pr-arc small{font:10px var(--mono);letter-spacing:.08em;color:var(--muted)}
+.pr-arc h3{font:600 17px var(--serif);margin:2px 0 4px}
+.pr-arc p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.55}
+.pr-jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.sk-play{border-color:var(--coral);color:var(--coral)}
+.sketch-hint{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.sketch-hint b{color:var(--ink)}
+.sketch-tab{margin-top:12px;padding:10px 12px;border:1px solid var(--line);background:var(--white);min-height:130px}
+.sketch-empty{margin:40px 0;text-align:center;font-size:13px;color:var(--muted)}
+.pr-plan{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;align-items:start}
+.pr-plan .routine-list b{font-size:13px}
+.pr-plan .routine-list small{font-size:11px}
+.pr-week li b{color:var(--ink)}
+.pr-plan+.related-chords{margin-top:22px}
+@media(max-width:900px){.pr-plan{grid-template-columns:1fr}}
+@media(max-width:640px){.pr-arc,.pr-jobs{grid-template-columns:1fr}.melody-steps .jam-chords button{min-width:0;flex:1 1 40%}}

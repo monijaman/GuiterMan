@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2e9">
+  <meta name="description" content="A visual, interactive guitar guide: learn the fretboard, chords, scales, rhythm and songs.">
+  <title>Guitar Learn — a field guide for the fretboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="learning.css">
+  <script src="chords/chord-data.js" defer></script>
+  <script src="chord-diagram.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Guitar Learn home"><span class="brand-mark">G</span><span>GUITAR<br>FIELD NOTES</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="theory/index.html">Music theory</a><a href="ear/index.html">Ear training</a><a href="#levels">Course path</a><a href="chords/index.html">Chord library</a><a href="scales/index.html">Scales & harmony</a><a href="arpeggios/index.html">Arpeggios</a><a href="journey/index.html">Journey</a>
+    </nav>
+    <a class="top-cta" href="practice/index.html">Practice <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero page-shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> A visual guide to guitar</p>
+        <h1 id="hero-title">Make the<br><em>fretboard</em><br>make sense.</h1>
+        <p class="hero-intro">From your first clean chord to the reason a progression works. Learn by seeing the notes connect.</p>
+        <a class="button button-dark" href="#start">Start with the strings <span aria-hidden="true">↓</span></a>
+        <div class="hero-meta"><span class="meta-line"></span><span>9 progressive grades</span><span>·</span><span>Play as you learn</span></div>
+      </div>
+      <div class="hero-art" aria-label="Illustrated guitar fretboard showing the notes in G major">
+        <div class="art-caption"><span>01 / THE MAP</span><span>G MAJOR · OPEN POSITION</span></div>
+        <div id="heroFretboard" class="hero-fretboard"></div>
+        <div class="art-bottom"><span class="note-key"><i class="key-root"></i> Root</span><span class="note-key"><i class="key-scale"></i> Scale tone</span><span class="art-caption-small">Standard tuning · 6 strings</span></div>
+        <div class="art-sticker">FIND<br>YOUR<br>ROOT</div>
+      </div>
+    </section>
+
+    <section id="levels" class="level-path page-shell">
+      <div class="level-heading"><div><p class="eyebrow">THE LEARNING PATH</p><h2>One step at a time.<br><em>Nine grades to grow.</em></h2></div><p>Start with the first clean sound. Each grade adds a small set of skills, then brings them together in music.</p></div>
+      <div class="level-grid">
+        <a href="lessons/grade-1.html"><span>BEGINNER · 01</span><b>First sounds</b><small>Setup · Em · Am · steady beat</small></a>
+        <a href="lessons/grade-2.html"><span>BEGINNER · 02</span><b>Open chords</b><small>C · G · D · chord changes</small></a>
+        <a href="lessons/grade-3.html"><span>BEGINNER · 03</span><b>Play songs</b><small>Strumming · progressions · picking</small></a>
+        <a href="lessons/grade-4.html"><span>INTERMEDIATE · 04</span><b>Barre shapes</b><small>Movable forms · rhythm control</small></a>
+        <a href="lessons/grade-5.html"><span>INTERMEDIATE · 05</span><b>Scales connect</b><small>Intervals · minor keys · fretboard</small></a>
+        <a href="lessons/grade-6.html"><span>INTERMEDIATE · 06</span><b>Color & motion</b><small>7th chords · arpeggios · groove</small></a>
+        <a href="lessons/grade-7.html"><span>ADVANCED · 07</span><b>Make it your own</b><small>Modes · chord melody · phrasing</small></a>
+        <a href="lessons/grade-8.html"><span>ADVANCED · 08</span><b>Arrange & expand</b><small>Extensions · voicing · time feel</small></a>
+        <a href="lessons/grade-9.html"><span>ADVANCED · 09</span><b>Compose & perform</b><small>Harmony · transcription · recording</small></a>
+      </div>
+    </section>
+
+    <section class="chapter-strip" aria-label="Guide chapters">
+      <div class="page-shell strip-inner"><span class="strip-label">YOUR ROUTE</span><a href="#start"><b>01</b> Start here</a><a href="#chords"><b>02</b> First chords</a><a href="#rhythm"><b>03</b> Rhythm</a><a href="#progressions"><b>04</b> Progressions</a><a href="#scales"><b>05</b> Scales</a><a href="#picking"><b>06</b> Picking</a><a href="#practice"><b>07</b> Practice & songs</a></div>
+    </section>
+
+    <section id="start" class="section page-shell">
+      <div class="section-heading"><div><p class="eyebrow">01 / GETTING STARTED</p><h2>Meet your instrument.</h2></div><p class="section-deck">Six strings, one repeating map. Learn the names first; the rest of the fretboard follows.</p></div>
+      <div class="start-grid">
+        <article class="tuning-panel">
+          <div class="panel-head"><span>STANDARD TUNING</span><span class="small-label">LOW → HIGH</span></div>
+          <div class="tuning-visual" aria-label="Guitar strings from thickest to thinnest: E A D G B E">
+            <div class="string-row"><span class="string-index">6</span><span class="string-wire wire-6"></span><strong>E</strong><span class="string-name">Low E</span></div>
+            <div class="string-row"><span class="string-index">5</span><span class="string-wire wire-5"></span><strong>A</strong><span class="string-name">A</span></div>
+            <div class="string-row"><span class="string-index">4</span><span class="string-wire wire-4"></span><strong>D</strong><span class="string-name">D</span></div>
+            <div class="string-row"><span class="string-index">3</span><span class="string-wire wire-3"></span><strong>G</strong><span class="string-name">G</span></div>
+            <div class="string-row"><span class="string-index">2</span><span class="string-wire wire-2"></span><strong>B</strong><span class="string-name">B</span></div>
+            <div class="string-row"><span class="string-index">1</span><span class="string-wire wire-1"></span><strong>E</strong><span class="string-name">High E</span></div>
+          </div>
+          <p class="panel-note">Remember it: <b>E</b>ddie <b>A</b>te <b>D</b>ynamite, <b>G</b>ood <b>B</b>ye <b>E</b>ddie.</p>
+        </article>
+        <article class="body-panel">
+          <div class="panel-head"><span>SET UP TO PLAY</span><span class="small-label">01—03</span></div>
+          <svg class="guitar-parts" viewBox="0 0 360 185" role="img" aria-label="Guitar parts: headstock, tuning pegs, frets, sound hole and bridge">
+            <g fill="none" stroke="#5e7165" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M171 43V106c-22-4-42 10-42 31 0 16 12 27 30 27 9 17 29 17 38 0 18 0 30-11 30-27 0-21-20-35-42-31V43Z" fill="#e5efdc" stroke-width="1.5"/>
+              <path d="M171 43h14V11h-14l-9 9v14Z" fill="#c8ed5c" stroke-width="1.5"/>
+              <circle cx="192" cy="136" r="11" fill="#d7e6e0" stroke-width="1.5"/>
+              <path d="M171 43h14M171 55h14M171 66h14M171 77h14M171 88h14M163 24h27M166 29h22" stroke-width="1"/>
+              <path d="M188 144h-20v5h20M164 18h-5m5 9h-5m34-9h5m-5 9h5" stroke-width="1.3"/>
+              <path d="M174 21v122m2-122v122m2-122v122m2-122v122m2-122v122m2-122v122" stroke="#91a095" stroke-width=".55"/>
+              <path d="M91 16h65l7 2m-61 33h61m51 20h42m-42 65h47m-50 22h42" stroke="#8ca094" stroke-width=".8"/>
+            </g>
+            <g fill="#63736a" font-family="DM Mono, monospace" font-size="8" letter-spacing=".7">
+              <text x="8" y="14">HEADSTOCK</text><text x="8" y="49">TUNING PEGS</text><text x="253" y="68">FRETS</text><text x="251" y="131">SOUND HOLE</text><text x="231" y="158">BRIDGE</text>
+            </g>
+          </svg>
+          <div class="body-steps">
+            <div class="body-step"><span class="step-number">01</span><div><h3>Parts, in a glance</h3><p>Headstock holds the tuners. The neck carries the frets; the body amplifies the strings. Press just behind a fret wire.</p></div></div>
+            <div class="body-step"><span class="step-number">02</span><div><h3>Tune before you play</h3><p>Use a clip-on or phone tuner. Turn the peg slowly until each open string reads E–A–D–G–B–E.</p></div></div>
+            <div class="body-step"><span class="step-number">03</span><div><h3>Hold it lightly</h3><p>Sit tall, rest the waist on your leg, and bring the neck slightly upward. Keep your fretting thumb relaxed behind the neck.</p></div></div>
+          </div>
+        </article>
+      </div>
+      <div class="tip-ribbon"><span class="tip-icon">!</span><p><b>Clean note check:</b> fret close to the wire, use your fingertip, then pluck each string one at a time. A buzz usually means adjust your finger, not squeeze harder.</p></div>
+    </section>
+
+    <section id="chords" class="section section-tint">
+      <div class="page-shell">
+        <div class="section-heading"><div><p class="eyebrow">02 / FIRST CHORDS</p><h2>Six shapes. A hundred songs.</h2></div><p class="section-deck">Read each diagram left to right: thick low E to thin high E. Open circles ring; × means skip that string.</p></div>
+        <div id="chordGrid" class="chord-grid" aria-live="polite"></div>
+        <div class="chord-footer"><span class="mini-swatch"></span><span>Each dot shows the note you play · coral = root note</span><span class="footer-divider"></span><span>Tip: arch fingers so nearby strings ring freely.</span></div>
+        <a class="text-link chord-library-link" href="chords/index.html">Explore the chord library: notes, formulas & movable forms <span>↗</span></a>
+      </div>
+    </section>
+
+    <section id="rhythm" class="section page-shell">
+      <div class="section-heading"><div><p class="eyebrow">03 / RHYTHM</p><h2>Feel the pulse first.</h2></div><p class="section-deck">Count evenly out loud. Your strumming hand keeps moving, even when it passes the strings silently.</p></div>
+      <div class="rhythm-layout">
+        <article class="rhythm-card rhythm-feature">
+          <div class="panel-head"><span>YOUR FIRST GROOVE</span><span class="tempo-mark">♩ = 76</span></div>
+          <div class="count-row"><span>COUNT</span><div class="beat-numbers"><b>1</b><b>&</b><b>2</b><b>&</b><b>3</b><b>&</b><b>4</b><b>&</b></div></div>
+          <div class="strum-row"><span>HAND</span><div class="strum-arrows"><b>↓</b><b>↓</b><b>↓</b><b>↓</b><b>↓</b><b>↓</b><b>↓</b><b>↓</b></div></div>
+          <div class="sound-row"><span>STRUM</span><div class="strum-sounds"><i>hit</i><i class="muted-hit">—</i><i>hit</i><i class="muted-hit">—</i><i>hit</i><i class="muted-hit">—</i><i>hit</i><i class="muted-hit">—</i></div></div>
+          <p class="rhythm-caption">Start with four relaxed downstrokes. Add the “&” upstrokes once your count feels steady.</p>
+        </article>
+        <article class="change-card"><span class="card-kicker">SMOOTH CHORD CHANGES</span><h3>Move less.<br>Listen more.</h3><ol><li><span>1</span> Keep fingers curved; lift only as far as needed.</li><li><span>2</span> Find the next shape before the beat arrives.</li><li><span>3</span> Loop two chords slowly until the change is quiet.</li></ol><div class="change-loop"><b>G</b><span>→</span><b>D</b><span>→</span><b>G</b><span class="loop-count">repeat × 4</span></div></article>
+      </div>
+    </section>
+
+    <section id="progressions" class="section progression-section">
+      <div class="page-shell">
+        <div class="section-heading"><div><p class="eyebrow">04 / CHORD PROGRESSIONS</p><h2>Chords have a home key.</h2></div><p class="section-deck">Build chords by stacking every other note of a scale. The key predicts which chords naturally belong together.</p></div>
+        <div class="progression-layout">
+          <article class="key-lab">
+            <div class="panel-head"><span>THE KEY BUILDER</span><span class="small-label">TRY A KEY</span></div>
+            <label class="select-label" for="keySelect">Choose a major key</label>
+            <select id="keySelect" aria-label="Choose a major key">
+              <option value="C">C major</option><option value="G">G major</option><option value="D">D major</option><option value="A">A major</option><option value="F">F major</option>
+            </select>
+            <div id="keyNotes" class="key-notes" aria-live="polite"></div>
+            <div id="diatonicChords" class="diatonic-chords" aria-live="polite"></div>
+            <p class="key-explain"><b>Triad recipe: 1 – 3 – 5.</b> Stack every other scale note. C–E–G makes C major; flatten the 3rd (C–E♭–G) and it becomes C minor.<br><br>Major-key pattern: <b>I · ii · iii · IV · V · vi · vii°</b><br>Uppercase is major, lowercase is minor; ° means diminished.</p>
+          </article>
+          <article class="minor-lab">
+            <div class="panel-head"><span>WHY THIS ONE WORKS</span><span class="small-label">MINOR KEY EXAMPLE</span></div>
+            <h3>Dm → Gm → A7</h3>
+            <div class="progression-beads"><div><b>Dm</b><span>D · F · A</span></div><i>→</i><div><b>Gm</b><span>G · B♭ · D</span></div><i>→</i><div class="bead-tension"><b>A7</b><span>A · C♯ · E · G</span></div></div>
+            <div class="resolution"><span class="resolution-note">C♯</span><span class="resolution-arrow">↗</span><span class="resolution-note resolution-home">D</span><p>The C♯ in A7 is outside D natural minor. It pulls a half-step up to D, making the return to Dm feel resolved.</p></div>
+            <p class="minor-footnote">Try D harmonic minor over A7: D · E · F · G · A · B♭ · C♯. The chord tones of each chord are your safest landing notes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="scales" class="section page-shell">
+      <div class="section-heading"><div><p class="eyebrow">05 / SCALES & THE FULL NECK</p><h2>See every note in a scale.</h2></div><p class="section-deck">Every fret moves one semitone. Pick a root and a scale to light up the full neck; root notes get the bright marker.</p></div>
+      <div class="scale-controls"><label>ROOT<select id="scaleRoot"><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>A</option><option>B</option></select></label><label>SCALE<select id="scaleType"><option value="major">Major</option><option value="minor">Natural minor</option><option value="pentatonic">Minor pentatonic</option><option value="harmonic">Harmonic minor</option></select></label><span class="scale-legend"><i></i> Root <i class="legend-scale"></i> Scale note <i class="legend-muted"></i> Other note</span></div>
+      <div class="neck-wrap"><div id="fullFretboard" class="full-fretboard" aria-label="Interactive guitar fretboard from open strings to fret 12"></div></div>
+      <div class="scale-bottom"><div class="scale-steps"><span class="small-label">INTERVAL RECIPE</span><strong id="scaleFormula">W – W – H – W – W – W – H</strong><span id="scaleFormulaNote">Whole step = 2 frets · half step = 1 fret</span></div><a class="text-link" href="scales/index.html">Full scales, harmony &amp; lead guide <span>↗</span></a></div>
+      <div class="reference-images"><figure><img src="../resourcess/gmajor/GMajorScale-min.png" alt="G major notes shown across a guitar fretboard"><figcaption>G major across the neck · local reference chart</figcaption></figure><figure><img src="../resourcess/gmajor/chord-cons_n.jpg" alt="Intervals that make major, minor and other chord qualities"><figcaption>Chord qualities come from changing scale degrees</figcaption></figure></div>
+    </section>
+
+    <section id="picking" class="section picking-section">
+      <div class="page-shell picking-layout">
+        <div><p class="eyebrow">06 / PICKING</p><h2>Let the notes<br>take turns.</h2><p class="section-deck">A chord can be strummed all at once or unfolded note by note. Keep the same chord shape and let each note ring.</p><div class="pick-tabs" role="group" aria-label="Picking pattern"><button class="pick-tab is-selected" data-pick="arpeggio">Arpeggio</button><button class="pick-tab" data-pick="finger">Fingerpicking</button><button class="pick-tab" data-pick="single">Single notes</button></div><p id="pickDescription" class="pick-description">Play chord tones one at a time: root, 3rd, 5th, 3rd. Try it slowly over Am.</p></div>
+        <div class="pick-visual"><div class="pick-visual-head"><span>AM · STRING PATH</span><span>HIGH E</span></div><div class="pick-neck" aria-label="Animated picking pattern across six strings"><div class="pick-string" data-string="6"><span>E</span><i></i></div><div class="pick-string" data-string="5"><span>A</span><i></i></div><div class="pick-string" data-string="4"><span>D</span><i></i></div><div class="pick-string" data-string="3"><span>G</span><i></i></div><div class="pick-string" data-string="2"><span>B</span><i></i></div><div class="pick-string" data-string="1"><span>E</span><i></i></div></div><div class="pick-beat"><span>1</span><span>&</span><span>2</span><span>&</span><span>3</span><span>&</span><span>4</span><span>&</span></div><button id="playPicking" class="button button-light"><span aria-hidden="true">▶</span> Hear the pattern</button></div>
+      </div>
+    </section>
+
+    <section id="practice" class="section page-shell">
+      <div class="section-heading"><div><p class="eyebrow">07 / PRACTICE & SONGS</p><h2>Small sessions add up.</h2></div><p class="section-deck">Ten focused minutes is a real practice. Choose one small win and keep your streak visible.</p></div>
+      <div class="practice-layout">
+        <article class="practice-panel"><div class="panel-head"><span>TODAY’S 10-MINUTE SET</span><span id="practiceCount" class="small-label">0 / 4 DONE</span></div><div class="routine-list"><label><input type="checkbox" data-practice="warmup"><span class="custom-check"></span><span><b>Warm up</b><small>Finger walk, one minute</small></span><em>1 min</em></label><label><input type="checkbox" data-practice="shapes"><span class="custom-check"></span><span><b>Chord shapes</b><small>Em · Am · C changes</small></span><em>3 min</em></label><label><input type="checkbox" data-practice="rhythm"><span class="custom-check"></span><span><b>Steady rhythm</b><small>Down-up strums with a click</small></span><em>3 min</em></label><label><input type="checkbox" data-practice="song"><span class="custom-check"></span><span><b>Play a song</b><small>One verse, no stopping</small></span><em>3 min</em></label></div><div class="streak-row"><span class="streak-symbol">✳</span><span><b id="streakCount">0 practice days</b><small>Progress is saved on this device.</small></span><button id="resetPractice" class="reset-button" title="Reset today's checklist">Reset</button></div></article>
+        <article class="metronome-panel"><div class="panel-head"><span>POCKET METRONOME</span><span class="small-label">BEAT / MIN</span></div><div class="metronome-display"><button id="tempoDown" aria-label="Decrease tempo">−</button><div><strong id="tempoValue">76</strong><span>BPM</span></div><button id="tempoUp" aria-label="Increase tempo">+</button></div><input id="tempoSlider" type="range" min="40" max="180" value="76" aria-label="Metronome tempo"><div id="metronomeBeat" class="metronome-beat" aria-hidden="true"><i></i><i></i><i></i><i></i></div><button id="metronomeToggle" class="button button-dark metronome-button"><span aria-hidden="true">▶</span> Start metronome</button></article>
+      </div>
+      <div class="songs-heading"><div><p class="eyebrow">SONG STARTERS</p><h3>Pick a familiar shape.</h3></div><div class="song-filters" role="group" aria-label="Filter songs by chords"><button class="song-filter is-selected" data-filter="all">All</button><button class="song-filter" data-filter="easy">2–3 chords</button><button class="song-filter" data-filter="open">Open-chord set</button></div></div>
+      <div class="song-grid" id="songGrid">
+        <article class="song-row" data-level="easy"><div class="song-number">01</div><div><h4>Horse with No Name</h4><p>America · two-chord loop</p></div><div class="song-chords"><b>Em</b><b>Dsus2</b></div><span class="song-tag">2 CHORDS</span></article>
+        <article class="song-row" data-level="open"><div class="song-number">02</div><div><h4>Knockin’ on Heaven’s Door</h4><p>Bob Dylan · open-chord changes</p></div><div class="song-chords"><b>G</b><b>D</b><b>Am</b><b>C</b></div><span class="song-tag">4 CHORDS</span></article>
+        <article class="song-row" data-level="open"><div class="song-number">03</div><div><h4>Love Me Do</h4><p>The Beatles · steady backbeat</p></div><div class="song-chords"><b>G</b><b>C</b><b>D</b></div><span class="song-tag">3 CHORDS</span></article>
+        <article class="song-row" data-level="easy"><div class="song-number">04</div><div><h4>Three Little Birds</h4><p>Bob Marley · relaxed groove</p></div><div class="song-chords"><b>A</b><b>D</b><b>E</b></div><span class="song-tag">3 CHORDS</span></article>
+      </div>
+      <p class="song-note">Chord versions vary by arrangement; use these as a starting point and match a beginner-friendly chart.</p>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="page-shell footer-inner"><a class="brand" href="#top"><span class="brand-mark">G</span><span>GUITAR<br>FIELD NOTES</span></a><span>Learn a shape. Hear a sound. Find the pattern.</span><a href="#top">Back to top ↑</a></div></footer>
+</body>
+</html>
