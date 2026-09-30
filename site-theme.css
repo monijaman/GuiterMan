@@ -168,6 +168,8 @@ body .course-footer,body .footer-inner>span,body .footer-inner>a:last-child{font
 #gfn-translate-el,.skiptranslate>iframe,iframe.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-frame,.VIpgJd-ZVi9od-ORHb-OEVmcd,.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,.VIpgJd-yAWNEb-L7lbkb{display:none!important}
 body{top:0!important}
 .goog-text-highlight{background:none!important;box-shadow:none!important}
+/* Google drops the spaces around untranslated notation; restore a gap */
+html.translated-ltr .gfn-note,html.translated-rtl .gfn-note{margin-inline:.28em}
 @media(max-width:1180px){
   .lang-current{display:none}
   .lang-code{display:inline}

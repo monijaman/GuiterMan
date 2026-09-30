@@ -114,18 +114,103 @@
   if (readCookieLang() !== (current === 'en' ? '' : current)) writeCookieLang(current);
 
   // Keep musical notation, diagrams and the brand mark out of translation.
+  function markNoTranslate(el) {
+    el.setAttribute('translate', 'no');
+    el.classList.add('notranslate');
+  }
+
   function protect(root) {
     if (!(root instanceof Element)) return;
     const targets = root.matches('svg, canvas, .brand, .notranslate') ? [root] : [];
     targets.push(...root.querySelectorAll('svg, canvas, .brand'));
-    for (const el of targets) el.setAttribute('translate', 'no');
-    for (const el of targets) el.classList.add('notranslate');
+    targets.forEach(markNoTranslate);
+  }
+
+  // Note names (C, F#, Bb), chords (Am, Bdim, Cmaj7, D/F#), keys (A minor) and
+  // Roman numerals (ii, IV, vii°) stay in English inside translated text.
+  const NOTE = '[A-G](?:#|b|♯|♭)?';
+  const QUALITY = '(?:maj|min|dim|aug|sus|add|m|°|ø|\\+)?\\d*(?:(?:sus|add|maj|b|#|♭|♯)\\d+)*';
+  const CHORD = `${NOTE}${QUALITY}(?:\\/${NOTE})?`;
+  const ROMAN = '(?:b|♭)?(?:vii|VII|iii|III|ii|II|iv|IV|vi|VI|v|V|i|I)(?:°|ø|\\+|maj7|m7|7)?';
+  const SAFE_ROMAN = '(?:b|♭)?(?:vii|VII|iii|III|ii|IV|iv|vi|VI|V)(?:°|ø|\\+|maj7|m7|7)?';
+  const END = '(?![\\w#♯♭°ø+])';
+  const START = '(?<![\\w#♯♭])';
+  const RUN_SEP = '(?:\\s*[–—\\-,]\\s*|\\s+)';
+  // "key of G" is kept whole: machine translation turns "key" into a door key.
+  const KEY = `(?:[Kk]ey of\\s+)?${CHORD}(?:\\s+(?:major|minor))?`;
+  // A text node made only of notation, e.g. a table cell "C E G", "F#dim", "vii°", "7" or "minor".
+  const WHOLE_NODE = new RegExp(`^[\\s–—\\-,·()/]*(?:(?:${CHORD}|${ROMAN}|\\d+|dim|aug|major|minor)${END}[\\s–—\\-,·()/]*)+$`);
+  // Notation inside a sentence: chord/key runs, Roman numeral progressions, lone safe numerals.
+  const IN_TEXT = new RegExp(
+    `${START}(?:${KEY}${END}(?:${RUN_SEP}${KEY}${END})*|${ROMAN}(?:\\s*[–—\\-,]\\s*${ROMAN})+${END}|${SAFE_ROMAN}${END})`,
+    'g',
+  );
+  const SKIP_PARENTS = 'script, style, textarea, code, pre, font, svg, .notranslate, [translate="no"]';
+
+  // A bare capital "A" at the start of a sentence, followed by an ordinary word,
+  // is the article ("A visual guide"); anywhere else it is the note.
+  function isArticle(match, before, rest) {
+    if (match !== 'A' || !/(?:^|[.!?:"“‘]\s*)\s*$/.test(before)) return false;
+    if (/^\s+(?:string|note|notes|root|shape|form|and|or|is|to)\b/.test(rest)) return false;
+    return /^\s+(?:[a-z]|[A-Z][a-z]{2,})/.test(rest);
+  }
+
+  function protectText(node) {
+    const text = node.nodeValue;
+    const parent = node.parentElement;
+    if (!parent || !text.trim() || parent.closest(SKIP_PARENTS)) return;
+
+    if (WHOLE_NODE.test(text)) {
+      if (parent.childNodes.length === 1 || parent.matches('option')) {
+        markNoTranslate(parent);
+        if (parent.matches('b, strong, em, i, span, a, small')) parent.classList.add('gfn-note');
+        return;
+      }
+      const span = document.createElement('span');
+      markNoTranslate(span);
+      node.replaceWith(span);
+      span.append(node);
+      return;
+    }
+    if (parent.matches('option, title')) return;
+
+    const pieces = [];
+    let last = 0;
+    for (const found of text.matchAll(IN_TEXT)) {
+      const end = found.index + found[0].length;
+      if (isArticle(found[0], text.slice(0, found.index), text.slice(end))) continue;
+      pieces.push(text.slice(last, found.index));
+      const span = document.createElement('span');
+      markNoTranslate(span);
+      span.classList.add('gfn-note');
+      span.textContent = found[0];
+      pieces.push(span);
+      last = end;
+    }
+    if (!pieces.length) return;
+    pieces.push(text.slice(last));
+    node.replaceWith(...pieces.filter((piece) => piece !== ''));
+  }
+
+  function protectNotation(root) {
+    if (root.nodeType === Node.TEXT_NODE) return protectText(root);
+    if (!(root instanceof Element) || root.closest(SKIP_PARENTS)) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(protectText);
   }
 
   if (current !== 'en') {
     protect(document.body);
+    protectNotation(document.body);
     new MutationObserver((records) => {
-      for (const record of records) record.addedNodes.forEach(protect);
+      for (const record of records) {
+        record.addedNodes.forEach((node) => {
+          protect(node);
+          protectNotation(node);
+        });
+      }
     }).observe(document.body, { childList: true, subtree: true });
 
     const host = document.createElement('div');
