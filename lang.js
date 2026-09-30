@@ -138,8 +138,9 @@
   const RUN_SEP = '(?:\\s*[–—\\-,]\\s*|\\s+)';
   // "key of G" is kept whole: machine translation turns "key" into a door key.
   const KEY = `(?:[Kk]ey of\\s+)?${CHORD}(?:\\s+(?:major|minor))?`;
-  // A text node made only of notation, e.g. a table cell "C E G", "F#dim", "vii°", "7" or "minor".
-  const WHOLE_NODE = new RegExp(`^[\\s–—\\-,·()/]*(?:(?:${CHORD}|${ROMAN}|\\d+|dim|aug|major|minor)${END}[\\s–—\\-,·()/]*)+$`);
+  // A text node made only of notation, e.g. a table cell "C E G", "F#dim", "vii°", "7", "minor",
+  // or tone/semitone steps "T – S – T".
+  const WHOLE_NODE = new RegExp(`^[\\s–—\\-,·()/]*(?:(?:${CHORD}|${ROMAN}|\\d+|dim|aug|major|minor|T|S)${END}[\\s–—\\-,·()/]*)+$`);
   // Notation inside a sentence: chord/key runs, Roman numeral progressions, lone safe numerals.
   const IN_TEXT = new RegExp(
     `${START}(?:${KEY}${END}(?:${RUN_SEP}${KEY}${END})*|${ROMAN}(?:\\s*[–—\\-,]\\s*${ROMAN})+${END}|${SAFE_ROMAN}${END})`,
@@ -163,13 +164,13 @@
     if (WHOLE_NODE.test(text)) {
       if (parent.childNodes.length === 1 || parent.matches('option')) {
         markNoTranslate(parent);
-        if (parent.matches('b, strong, em, i, span, a, small')) parent.classList.add('gfn-note');
+        const inFlow = parent.parentElement && !/flex|grid/.test(getComputedStyle(parent.parentElement).display);
+        if (inFlow && parent.matches('b, strong, em, i, span, a, small')) parent.classList.add('gfn-spaced');
         return;
       }
-      const span = document.createElement('span');
-      markNoTranslate(span);
-      node.replaceWith(span);
-      span.append(node);
+      const note = noteElement();
+      node.replaceWith(note);
+      note.append(node);
       return;
     }
     if (parent.matches('option, title')) return;
@@ -180,16 +181,30 @@
       const end = found.index + found[0].length;
       if (isArticle(found[0], text.slice(0, found.index), text.slice(end))) continue;
       pieces.push(text.slice(last, found.index));
-      const span = document.createElement('span');
-      markNoTranslate(span);
-      span.classList.add('gfn-note');
-      span.textContent = found[0];
-      pieces.push(span);
+      const note = noteElement();
+      note.textContent = found[0];
+      pieces.push(note);
       last = end;
     }
     if (!pieces.length) return;
     pieces.push(text.slice(last));
-    node.replaceWith(...pieces.filter((piece) => piece !== ''));
+    const parts = pieces.filter((piece) => piece !== '');
+    // In a flex/grid container every child becomes its own box, so keep the sentence together.
+    if (/flex|grid/.test(getComputedStyle(parent).display)) {
+      const group = document.createElement('gfn-text');
+      group.append(...parts);
+      node.replaceWith(group);
+    } else {
+      node.replaceWith(...parts);
+    }
+  }
+
+  // A custom inline tag, so page styles written for <span> (e.g. display:block) never apply.
+  function noteElement() {
+    const note = document.createElement('gfn-note');
+    note.setAttribute('translate', 'no');
+    note.className = 'notranslate';
+    return note;
   }
 
   function protectNotation(root) {
