@@ -28,3 +28,7 @@ themeButton.addEventListener('click', () => {
   updateThemeButton();
 });
 document.querySelector('.topbar')?.append(themeButton);
+
+const langLoader = document.createElement('script');
+langLoader.src = new URL('lang.js', themeScriptUrl).href;
+document.head.append(langLoader);

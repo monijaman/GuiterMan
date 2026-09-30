@@ -133,3 +133,52 @@ body .course-footer,body .footer-inner>span,body .footer-inner>a:last-child{font
   .chord-directory-card>span:nth-child(2){min-width:0}
   .chord-directory-card strong,.chord-directory-card small{overflow-wrap:anywhere}
 }
+
+/* Language switcher */
+.topbar-tools{display:flex;align-items:center;gap:8px}
+.lang-switch{position:relative}
+.lang-button{display:inline-flex;align-items:center;gap:8px;padding:7px 11px 7px 9px;border:1px solid var(--green);border-radius:999px;background:var(--green);color:#1a1f17;font:700 12px var(--sans);cursor:pointer;white-space:nowrap;box-shadow:0 0 0 0 rgba(200,237,92,.45);transition:box-shadow .2s,transform .15s}
+.lang-button:hover,.lang-switch.is-open .lang-button{box-shadow:0 0 0 4px rgba(200,237,92,.28)}
+.lang-button:active{transform:translateY(1px)}
+.lang-button:focus-visible,.lang-option:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.lang-globe{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6}
+.lang-flag{width:20px;height:15px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.lang-code{display:none;font-family:var(--mono);letter-spacing:.06em}
+.lang-caret{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;transition:transform .2s}
+.lang-switch.is-open .lang-caret{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 10px);right:0;z-index:40;width:420px;max-width:calc(100vw - 32px);padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--white);color:var(--ink);box-shadow:0 18px 50px rgba(0,0,0,.28);animation:lang-pop .16s ease-out}
+.lang-menu[hidden]{display:none}
+@keyframes lang-pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.lang-menu-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font:700 14px var(--sans)}
+.lang-count{font:500 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lang-detected{display:flex;align-items:center;gap:8px;margin:0 0 12px;padding:8px 10px;border-radius:8px;background:var(--soft-blue);font-size:12px;line-height:1.35}
+.lang-detected img{width:18px;height:13px;object-fit:cover;border-radius:2px;flex:none}
+.lang-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.lang-option{position:relative;display:flex;align-items:center;gap:9px;padding:8px 9px;border:1px solid var(--line);border-radius:9px;background:transparent;color:var(--ink);text-align:left;cursor:pointer;transition:border-color .15s,background .15s}
+.lang-option:hover{border-color:var(--green-dark);background:rgba(200,237,92,.1)}
+.lang-option img{width:22px;height:16px;object-fit:cover;border-radius:2px;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.lang-option span{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.lang-option strong{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lang-option small{font-size:10px;color:var(--muted)}
+.lang-option.is-active{border-color:var(--green);background:var(--green);color:#1a1f17}
+.lang-option.is-active small{color:#3d4a2a}
+.lang-option.is-suggested:not(.is-active)::after{content:'';position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--coral)}
+.lang-footnote{margin:12px 0 0;font-size:10px;line-height:1.4;color:var(--muted)}
+/* Hide Google Translate's own banner, tooltips and highlights */
+#gfn-translate-el,.skiptranslate>iframe,iframe.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-frame,.VIpgJd-ZVi9od-ORHb-OEVmcd,.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,.VIpgJd-yAWNEb-L7lbkb{display:none!important}
+body{top:0!important}
+.goog-text-highlight{background:none!important;box-shadow:none!important}
+@media(max-width:1180px){
+  .lang-current{display:none}
+  .lang-code{display:inline}
+}
+@media(max-width:640px){
+  .topbar-tools{gap:5px}
+  .topbar-tools .theme-toggle{font-size:0;gap:0}
+  .topbar-tools .theme-toggle::first-letter{font-size:13px}
+  .lang-switch{position:static}
+  .lang-button{gap:5px;padding:5px 8px;font-size:11px}
+  .lang-globe,.lang-code{display:none}
+  .lang-menu{position:fixed;top:70px;left:16px;right:16px;width:auto;max-width:none;max-height:calc(100vh - 90px);overflow:auto}
+  .lang-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
