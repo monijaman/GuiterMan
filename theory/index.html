@@ -94,6 +94,7 @@
 
     <h3 class="sub-heading">In plain words: what does "the same seven chords" mean?</h3>
     <p class="th-note">It does <b>not</b> mean every key uses the same chord names. C major and G major use different chords. It means every major key has the <b>same pattern</b> of seven chords: <b>major, minor, minor, major, major, minor, diminished</b>. Learn that one pattern and you know the chords of all twelve major keys.</p>
+    <figure class="th-figure th-gap"><div class="th-scroll"><div id="familyPic" class="th-wide"></div></div><figcaption><b>One colour pattern, every key.</b> <b>Green</b> = major, <b>blue</b> = minor, <b>coral</b> = diminished. The names in each row change, but the colours always fall in the same places: major, minor, minor, major, major, minor, diminished.</figcaption></figure>
 
     <ol class="lead-steps">
       <li><span>1</span><div><h3>Write out the key's scale</h3><p>A key is a home note plus its scale. The key of C uses the C major scale: <b>C D E F G A B</b>. Those seven notes are the only notes the key "allows".</p></div></li>
@@ -101,6 +102,10 @@
       <li><span>3</span><div><h3>Some come out major, some minor</h3><p>The scale mixes tones and semitones, so the gaps inside each chord differ. Bottom gap of <b>4 frets</b> then 3 = <b>major</b>. Bottom gap of <b>3 frets</b> then 4 = <b>minor</b>. 3 then 3 = <b>diminished</b> (rare, you can mostly skip it).</p></div></li>
       <li><span>4</span><div><h3>Number them 1 to 7</h3><p>Give each chord the number of the scale note it starts on, in Roman numerals: I II III IV V VI VII. Write major ones in <b>CAPITALS</b> and minor ones in <b>small letters</b>: I ii iii IV V vi vii°.</p></div></li>
     </ol>
+    <div class="th-grid-2">
+      <figure class="th-figure"><div id="skipPic"></div><figcaption><b>Step 2 in a picture:</b> each row starts on the next scale note and takes every other note (skip one, take one). The dots are the notes you skip. When you run past B, keep going round to C again.</figcaption></figure>
+      <figure class="th-figure"><div id="gapPic"></div><figcaption><b>Step 3 in a picture:</b> count frets along one string. C major is <b>4 + 3</b>, D minor is <b>3 + 4</b>, B diminished is <b>3 + 3</b>. The top note is 7 frets up for major and minor, only 6 for diminished.</figcaption></figure>
+    </div>
 
     <h3 class="sub-heading">Worked example: the key of C</h3>
     <div class="scale-table-wrap th-scroll">
@@ -115,6 +120,11 @@
         </tbody>
       </table>
     </div>
+    <figure class="th-figure th-gap">
+      <div class="th-fig-bar"><label>KEY<select id="boxKey"></select></label><button class="hear-button" type="button" data-play-walk="keyBoxes">▶ Hear all seven</button></div>
+      <div class="chord-strip th-key-boxes" id="keyBoxes"></div>
+      <figcaption><b>The seven chords as shapes.</b> Change the key: the numbers and colours stay put, only the shapes and names change. Click a chord to open it in the chord library.</figcaption>
+    </figure>
 
     <h3 class="sub-heading">Same pattern, different key: the key of G</h3>
     <div class="scale-table-wrap th-scroll">
@@ -128,6 +138,11 @@
       </table>
     </div>
     <p class="th-note">Read down any column: the names change, but the <b>type</b> never does. The IV chord is always major, the vi chord is always minor. So a song written as <b>I – V – vi – IV</b> is C–G–Am–F in the key of C, G–D–Em–C in the key of G, and D–A–Bm–G in the key of D. Same song, just moved to a key that suits your voice or your capo.</p>
+    <div class="th-grid-2 th-gap">
+      <figure class="th-figure"><div id="movePic"></div><figcaption><b>I – V – vi – IV in three keys.</b> The numbers show the playing order. In every row the same four columns light up, in the same order. That shape <i>is</i> the song; the key only decides the names.</figcaption></figure>
+      <div class="th-fig-side"><p class="th-pair-label">WHY NUMBERS BEAT NAMES</p><p>Learn <b>where</b> a chord sits in the key once, and you never have to relearn it. The vi chord is always the minor chord three frets below the home note: Am in C, Em in G, Bm in D.</p><p>Guitar makes it even easier: the root notes of I, IV and V form a fixed hand shape, shown below.</p></div>
+    </div>
+    <figure class="th-figure th-gap"><div class="th-scroll"><div id="shapeNeck"></div></div><figcaption><b>On the neck it's one hand shape.</b> Put the I root on the E string; IV is straight across on the A string and V is two frets further. <b>Coral</b> = key of G (frets 3 and 5), <b>blue</b> = key of C (frets 8 and 10). Slide the shape to change key. Click a dot to hear the root.</figcaption></figure>
 
     <div class="th-faq">
       <details><summary>Why bother with numbers instead of chord names?</summary><p>Because a number works in every key. If a friend says "it's a 1–4–5 in A", you instantly know the chords are A, D and E, without anyone writing them down. Moving a song to a new key (transposing) becomes a lookup, not a puzzle.</p></details>

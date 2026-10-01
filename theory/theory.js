@@ -369,6 +369,94 @@ function stackSvg() {
 $('#numberPattern').innerHTML = patternSvg();
 $('#stackPic').innerHTML = stackSvg();
 
+// Same colour stripe in every key: the chord names change, the major/minor pattern doesn't.
+function familySvg(keys = ['C', 'G', 'D', 'A', 'F']) {
+  const L = 64, W = 66, H = 38, top = 30;
+  const parts = MAJOR_NUMERALS.map((numeral, index) => `<text x="${L + index * W + W / 2 - 3}" y="${top - 10}" class="np-numeral">${numeral}</text>`);
+  keys.forEach((root, row) => {
+    const y = top + row * (H + 6);
+    parts.push(`<text x="0" y="${y + H / 2 + 5}" class="np-chord fm-key">Key of ${pretty(root)}</text>`);
+    keyChords(root, 'major').forEach((chord, index) => parts.push(`<g class="np-cell is-${chord.quality}"><rect x="${L + index * W}" y="${y}" width="${W - 6}" height="${H}" rx="6"/><text x="${L + index * W + W / 2 - 3}" y="${y + H / 2 + 5}" class="np-tone">${chord.name.replace('dim', '°')}</text></g>`));
+  });
+  return `<svg class="th-svg" viewBox="-4 0 ${L + 7 * W + 4} ${top + keys.length * (H + 6)}" role="img" aria-label="The chords of C, G, D, A and F major: the same major, minor and diminished colour pattern in every key">${parts.join('')}</svg>`;
+}
+// Skip one, take one: each row picks scale notes 1, 3 and 5 counted from a different start.
+function skipSvg(root = 'C') {
+  const scale = spellScale(root);
+  const L = 92, W = 36, H = 30, top = 34, cols = 11;
+  const parts = [];
+  for (let col = 0; col < cols; col += 1) parts.push(`<text x="${L + col * W + W / 2}" y="${top - 14}" class="sk-head${col % 7 === 0 ? ' is-root' : ''}">${pretty(scale[col % 7].name)}</text>`);
+  keyChords(root, 'major').forEach((chord, row) => {
+    const y = top + row * H + H / 2;
+    parts.push(`<text x="0" y="${y + 5}" class="np-numeral sk-num">${chord.numeral}</text><text x="34" y="${y + 5}" class="np-chord sk-chord">${chord.name}</text>`);
+    for (let col = 0; col < cols; col += 1) {
+      const picked = col >= row && col <= row + 4 && (col - row) % 2 === 0;
+      const x = L + col * W + W / 2;
+      parts.push(picked
+        ? `<g class="np-cell is-${chord.quality}"><circle cx="${x}" cy="${y}" r="12"/><text x="${x}" y="${y + 4}" class="np-q">${pretty(scale[col % 7].name)}</text></g>`
+        : `<circle cx="${x}" cy="${y}" r="3" class="sk-skip"/>`);
+    }
+    parts.push(`<path d="M${L + row * W + W / 2 + 12} ${y}H${L + (row + 4) * W + W / 2 - 12}" class="sk-link"/>`);
+  });
+  return `<svg class="th-svg" viewBox="0 0 ${L + cols * W + 4} ${top + 7 * H + 6}" role="img" aria-label="Building the seven chords of ${root} major by taking every other scale note">${parts.join('')}</svg>`;
+}
+// Count the frets inside the chord: 4+3 = major, 3+4 = minor, 3+3 = diminished.
+function gapSvg() {
+  const rows = [['C', 'major', [4, 3], ['C', 'E', 'G']], ['D', 'minor', [3, 4], ['D', 'F', 'A']], ['B', 'diminished', [3, 3], ['B', 'D', 'F']]];
+  const L = 96, W = 42, H = 74, top = 6;
+  const parts = [];
+  rows.forEach(([root, quality, gaps, names], row) => {
+    const y = top + row * H + 40;
+    const start = pcOf(root);
+    const tones = [0, gaps[0], gaps[0] + gaps[1]];
+    parts.push(`<text x="0" y="${y - 2}" class="np-chord gp-name">${root}${SUFFIX[quality]}</text><text x="0" y="${y + 15}" class="np-foot">${quality}</text>`);
+    parts.push(`<line x1="${L}" y1="${y}" x2="${L + 8 * W}" y2="${y}" class="ld-string"/>`);
+    for (let fret = 0; fret <= 8; fret += 1) parts.push(`<line x1="${L + fret * W}" y1="${y - 8}" x2="${L + fret * W}" y2="${y + 8}" class="ld-fret"/>`);
+    for (let step = 0; step < 8; step += 1) {
+      const x = L + step * W + W / 2;
+      const hit = tones.indexOf(step);
+      parts.push(hit >= 0
+        ? `<g class="np-cell is-${quality}"><circle cx="${x}" cy="${y}" r="13"/><text x="${x}" y="${y + 4}" class="np-q">${names[hit]}</text></g>`
+        : `<text x="${x}" y="${y + 4}" class="gp-off">${SHARPS[(start + step) % 12]}</text>`);
+    }
+    gaps.forEach((gap, index) => {
+      const x1 = L + tones[index] * W + W / 2, x2 = L + tones[index + 1] * W + W / 2;
+      parts.push(`<path d="M${x1 + 4} ${y - 16} Q${(x1 + x2) / 2} ${y - 34} ${x2 - 4} ${y - 16}" class="kb-step ${gap === 4 ? 'step-T' : 'step-S'}"/><text x="${(x1 + x2) / 2}" y="${y - 28}" class="kb-step-label gp-gap ${gap === 4 ? 'step-T' : 'step-S'}">${gap} frets</text>`);
+    });
+  });
+  return `<svg class="th-svg" viewBox="0 -6 ${L + 8 * W + 6} ${top + rows.length * H + 4}" role="img" aria-label="Fret gaps inside C major (4 then 3), D minor (3 then 4) and B diminished (3 then 3)">${parts.join('')}</svg>`;
+}
+// One song, three keys: I – V – vi – IV traces the same zig-zag through every row.
+function moveSvg(progression = ['I', 'V', 'vi', 'IV'], keys = ['C', 'G', 'D']) {
+  const L = 76, W = 60, H = 56, top = 40;
+  const parts = MAJOR_NUMERALS.map((numeral, index) => `<text x="${L + index * W + W / 2 - 3}" y="${top - 18}" class="np-numeral">${numeral}</text>`);
+  keys.forEach((root, row) => {
+    const y = top + row * H;
+    parts.push(`<text x="0" y="${y + 25}" class="np-chord fm-key">Key of ${pretty(root)}</text>`);
+    keyChords(root, 'major').forEach((chord, index) => {
+      const order = progression.indexOf(chord.numeral);
+      const x = L + index * W;
+      const badge = order >= 0 ? `<circle cx="${x + W - 10}" cy="${y + 4}" r="9" class="mv-dot"/><text x="${x + W - 10}" y="${y + 8}" class="mv-order">${order + 1}</text>` : '';
+      parts.push(`<g class="np-cell ${order >= 0 ? `is-${chord.quality}` : 'is-off'}"><rect x="${x}" y="${y}" width="${W - 6}" height="40" rx="6"/><text x="${x + W / 2 - 3}" y="${y + 25}" class="np-tone">${chord.name.replace('dim', '°')}</text></g>${badge}`);
+    });
+  });
+  return `<svg class="th-svg" viewBox="0 0 ${L + 7 * W + 4} ${top + keys.length * H - 10}" role="img" aria-label="${progression.join(' ')} in the keys of ${keys.join(', ')}">${parts.join('')}</svg>`;
+}
+$('#familyPic').innerHTML = familySvg();
+$('#skipPic').innerHTML = skipSvg();
+$('#gapPic').innerHTML = gapSvg();
+$('#movePic').innerHTML = moveSvg();
+
+// The 1–4–5 box: the same hand shape on the neck in any key, just slid up or down.
+const shapeCells = [['G', 3, 'root'], ['C', 8, 'blue']].flatMap(([root, fret, cls]) => [
+  { s: 0, f: fret, label: 'I', cls, title: `${root}: the I chord of ${root}, E string fret ${fret}` },
+  { s: 1, f: fret, label: 'IV', cls, title: `${pretty(spellScale(root)[3].name)}: the IV chord of ${root}, A string fret ${fret}` },
+  { s: 1, f: fret + 2, label: 'V', cls, title: `${pretty(spellScale(root)[4].name)}: the V chord of ${root}, A string fret ${fret + 2}` }
+]);
+$('#shapeNeck').innerHTML = neckSvg(shapeCells, { label: 'Roots of the I, IV and V chords in G (frets 3 and 5) and in C (frets 8 and 10)' });
+wirePlayback($('#shapeNeck'));
+
+
 const NUMBER_KEYS = { major: ['C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'], minor: ['A', 'Bb', 'B', 'C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#'] };
 const PROGRESSIONS = {
   major: [['I', 'IV', 'V'], ['I', 'vi', 'IV', 'V'], ['ii', 'V', 'I'], ['I', 'ii', 'V', 'I'], ['I', 'V', 'vi', 'IV']],
@@ -422,6 +510,23 @@ $('#numTable').addEventListener('click', (event) => {
 });
 fillProgressions();
 renderNumbers();
+
+// Chord boxes for all seven chords of a key, playable one after another.
+const boxKey = $('#boxKey');
+boxKey.innerHTML = NUMBER_KEYS.major.map((root) => `<option value="${root}"${root === 'C' ? ' selected' : ''}>${pretty(root)} major</option>`).join('');
+function renderKeyBoxes() {
+  const items = [];
+  const chips = keyChords(boxKey.value, 'major').map((chord) => {
+    const frets = voicingFor(chordModel.roots[chord.pc], chord.quality);
+    items.push({ chord: chord.name }, ['stack', frets ? stackPairs(frets) : [], 2, frets ?? [null, null, null, null, null, null]]);
+    const box = frets ? boxSvg(frets, chordModel.roots[chord.pc], chord.quality, chord.name) : '';
+    return `<a class="num-chip is-small is-${chord.quality}" data-index="${items.length - 1}" href="${detailUrl(chord)}"><span>${chord.numeral}</span>${box}<b>${chord.name}</b></a>`;
+  });
+  playable.set('keyBoxes', { items });
+  $('#keyBoxes').innerHTML = chips.join('');
+}
+boxKey.addEventListener('change', renderKeyBoxes);
+renderKeyBoxes();
 
 // Circle of fifths
 const CIRCLE_MAJOR = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Db', 'Ab', 'Eb', 'Bb', 'F'];
