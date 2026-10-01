@@ -349,25 +349,7 @@ function patternSvg() {
   const row = (numerals, qualities, y, title) => `<text x="0" y="${y - 8}" class="np-title">${title}</text>` + numerals.map((numeral, index) => `<g class="np-cell is-${qualities[index]}"><rect x="${index * W + 1}" y="${y}" width="${W - 6}" height="${H}" rx="6"/><text x="${index * W + W / 2 - 2}" y="${y + 26}" class="np-num">${numeral}</text><text x="${index * W + W / 2 - 2}" y="${y + 44}" class="np-q">${QUALITY_SHORT[qualities[index]]}</text></g>`).join('');
   return `<svg class="th-svg" viewBox="0 0 ${7 * W} ${2 * H + 62}" role="img" aria-label="Chord number pattern for major and minor keys">${row(MAJOR_NUMERALS, MAJOR_QUALITIES, 22, 'MAJOR KEY')}${row(MINOR_NUMERALS, MINOR_QUALITIES, H + 56, 'MINOR KEY')}</svg>`;
 }
-function stackSvg() {
-  const scale = spellScale('C');
-  const W = 66, S = 30, top = 8;
-  const parts = [];
-  scale.forEach((note, index) => {
-    const tones = [0, 2, 4].map((offset) => pretty(scale[(index + offset) % 7].name));
-    const quality = MAJOR_QUALITIES[index];
-    tones.forEach((tone, level) => {
-      const y = top + (2 - level) * (S + 4);
-      parts.push(`<g class="np-cell is-${quality}${level === 0 ? ' is-base' : ''}"><rect x="${index * W + 8}" y="${y}" width="${W - 16}" height="${S}" rx="5"/><text x="${index * W + W / 2}" y="${y + 20}" class="np-tone">${tone}</text></g>`);
-    });
-    const y = top + 3 * (S + 4) + 18;
-    parts.push(`<text x="${index * W + W / 2}" y="${y}" class="np-chord">${pretty(note.name)}${SUFFIX[quality]}</text><text x="${index * W + W / 2}" y="${y + 18}" class="np-numeral">${MAJOR_NUMERALS[index]}</text>`);
-  });
-  parts.push(`<text x="4" y="${top + 3 * (S + 4) + 58}" class="np-foot">Bottom row = the root. Stack the 3rd and 5th scale notes above it. Key of C.</text>`);
-  return `<svg class="th-svg" viewBox="0 0 ${7 * W} ${top + 3 * (S + 4) + 66}" role="img" aria-label="Chords of C major built by stacking thirds">${parts.join('')}</svg>`;
-}
 $('#numberPattern').innerHTML = patternSvg();
-$('#stackPic').innerHTML = stackSvg();
 
 // Same colour stripe in every key: the chord names change, the major/minor pattern doesn't.
 function familySvg(keys = ['C', 'G', 'D', 'A', 'F']) {
