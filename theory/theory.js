@@ -442,6 +442,37 @@ function moveSvg(progression = ['I', 'V', 'vi', 'IV'], keys = ['C', 'G', 'D']) {
   });
   return `<svg class="th-svg" viewBox="0 0 ${L + 7 * W + 4} ${top + keys.length * H - 10}" role="img" aria-label="${progression.join(' ')} in the keys of ${keys.join(', ')}">${parts.join('')}</svg>`;
 }
+// The 1–3–5 rule: count up the scale from the chord's own root and keep notes 1, 3 and 5.
+function ruleCountSvg() {
+  const rows = [['C', 'major', 'C'], ['D', 'minor', 'Dm'], ['A', 'minor', 'Am']];
+  const L = 78, W = 44, H = 76, top = 48;
+  const parts = [];
+  rows.forEach(([root, quality, name], row) => {
+    const scale = spellScale('C');
+    const start = scale.findIndex((note) => note.name === root);
+    const y = top + row * H;
+    parts.push(`<text x="0" y="${y + 4}" class="np-chord gp-name">${name}</text><text x="0" y="${y + 21}" class="np-foot">from ${root}</text>`);
+    for (let count = 0; count < 7; count += 1) {
+      const x = L + count * W + W / 2;
+      const note = pretty(scale[(start + count) % 7].name);
+      const kept = count % 2 === 0 && count <= 4;
+      parts.push(kept
+        ? `<g class="np-cell is-${quality}"><circle cx="${x}" cy="${y}" r="15"/><text x="${x}" y="${y + 5}" class="np-tone">${note}</text></g><text x="${x}" y="${y + 33}" class="rl-num is-kept">${count + 1}</text>`
+        : `<text x="${x}" y="${y + 5}" class="gp-off rl-off">${note}</text><text x="${x}" y="${y + 33}" class="rl-num">${count + 1}</text>`);
+    }
+    [0, 2].forEach((from) => {
+      const x1 = L + from * W + W / 2, x2 = L + (from + 2) * W + W / 2;
+      parts.push(`<path d="M${x1 + 6} ${y - 18} Q${(x1 + x2) / 2} ${y - 34} ${x2 - 6} ${y - 18}" class="kb-step step-S"/>`);
+    });
+  });
+  parts.push(`<text x="${L + W * 3.5}" y="4" class="np-foot rl-head">Keep 1, 3 and 5 · skip 2 and 4</text>`);
+  return `<svg class="th-svg" viewBox="0 -6 ${L + 7 * W + 4} ${top + rows.length * H - 18}" role="img" aria-label="The 1-3-5 rule counted from C, D and A">${parts.join('')}</svg>`;
+}
+$('#ruleCount').innerHTML = ruleCountSvg();
+$('#ruleBoxes').innerHTML = [['C', 'major', 'C'], ['A', 'minor', 'Am'], ['G', 'major', 'G']].map(([root, quality, name]) => {
+  const frets = voicingFor(root, quality);
+  return `<div class="num-chip is-small is-${quality}"><span>${name}</span>${sound.svg(frets, chordModel.voicingNotes(frets, root, quality), { title: name, degrees: true })}<b>${quality === 'major' ? '1 – 3 – 5' : '1 – ♭3 – 5'}</b></div>`;
+}).join('');
 $('#familyPic').innerHTML = familySvg();
 $('#skipPic').innerHTML = skipSvg();
 $('#gapPic').innerHTML = gapSvg();

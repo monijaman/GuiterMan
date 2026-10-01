@@ -267,3 +267,8 @@ body[data-theme="light"] .th-hero-art .tn-order{stroke:#dfe9e4}
 @media(max-width:640px){.num-chip.is-small{width:calc((100% - 20px) / 3);min-width:0;max-width:none}}
 .th-fig-bar select{min-width:130px;padding:8px;border:1px solid var(--line);background:var(--white);color:var(--ink);font:13px var(--sans)}
 .th-fig-side{padding:4px 4px 0;font-size:14px;line-height:1.65;color:var(--muted)}.th-fig-side p{margin:0 0 10px}
+.rl-num{font:11px var(--mono);text-anchor:middle;fill:var(--muted)}.rl-num.is-kept{font-weight:700;fill:var(--ink)}
+.rl-off{font-size:12px}
+.rl-head{text-anchor:middle}
+.th-rule-boxes{margin-top:0;justify-content:center}.th-rule-boxes .num-chip.is-small{width:calc((100% - 28px) / 3);min-width:0}
+.th-rule-boxes .cd .cd-degree{font:700 12px var(--mono);fill:var(--coral)}
