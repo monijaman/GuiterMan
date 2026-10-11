@@ -51,6 +51,3 @@ body{font-size:19px;line-height:1.7}
   .main-nav a,.top-cta,.button,.pick-tab,.song-filter{font-size:15px}
   .section-heading h2{font-size:34px}
 }
-
-/* Practice topics: native disclosure works with touch and keyboard. */
-.practice-menu{position:relative;flex-shrink:0}.practice-menu summary{cursor:pointer;list-style:none}.practice-menu summary::-webkit-details-marker{display:none}.practice-menu nav{position:absolute;right:0;top:calc(100% + 10px);width:260px;max-width:calc(100vw - 32px);padding:8px;background:var(--paper);border:1px solid var(--ink);box-shadow:0 10px 28px #0002;z-index:30}.practice-menu nav a{display:block;padding:12px;font-size:14px;line-height:1.4}.practice-menu nav a:hover,.practice-menu nav a:focus-visible{background:var(--green);color:var(--ink)}.practice-menu summary:focus-visible{outline:2px solid var(--coral);outline-offset:4px}

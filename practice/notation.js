@@ -26,7 +26,3 @@ document.addEventListener('click', event => {
   scoreTimers.push(setTimeout(() => { status.textContent = 'Finished'; }, elapsed));
 });
 window.addEventListener('pagehide', stopScore);
-// Close the Practice disclosure on Escape or when clicking outside.
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') document.querySelectorAll('.practice-menu[open]').forEach(menu => { menu.open = false; menu.querySelector('summary').focus(); });
-});

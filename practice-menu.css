@@ -1,0 +1,14 @@
+/* Shared navigation disclosure, independently loaded to avoid stale base styles. */
+.topbar .practice-menu{position:relative;flex:0 0 auto;margin:0;align-self:center}
+.topbar .practice-menu>summary.top-cta{display:flex;align-items:center;justify-content:center;gap:12px;width:auto;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--ink);font-weight:600;line-height:1.2;white-space:nowrap;list-style:none;cursor:pointer}
+.topbar .practice-menu>summary::marker{content:""}
+.topbar .practice-menu>summary::-webkit-details-marker{display:none}
+.topbar .practice-menu>summary span{display:inline-block;padding:0;font-size:12px;transition:transform .15s}
+.topbar .practice-menu[open]>summary span{transform:rotate(180deg)}
+.topbar .practice-menu>nav{position:absolute;top:calc(100% + 12px);right:0;display:none;width:280px;max-width:calc(100vw - 32px);box-sizing:border-box;padding:7px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);box-shadow:0 16px 40px rgba(0,0,0,.3);z-index:50}
+.topbar .practice-menu[open]>nav{display:flex;flex-direction:column;gap:4px}
+.topbar .practice-menu>nav>a{display:block;box-sizing:border-box;width:100%;padding:13px 14px;border-radius:6px;color:var(--ink);font-size:14px;font-weight:500;line-height:1.45;text-decoration:none;white-space:normal}
+.topbar .practice-menu>nav>a:hover,.topbar .practice-menu>nav>a:focus-visible{background:var(--green);color:#182019}
+.topbar .practice-menu>nav>a[aria-current="page"]{background:var(--paper);box-shadow:inset 3px 0 var(--green)}
+.topbar .practice-menu>summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(max-width:640px){.topbar .practice-menu>summary.top-cta{padding:8px 10px;font-size:12px;gap:8px}.topbar .practice-menu>nav{position:fixed;top:70px;right:16px;width:280px}}
