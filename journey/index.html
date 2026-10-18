@@ -55,6 +55,7 @@
         <figure class="j-figure"><div id="modeStrip"></div><figcaption id="modeCaption"></figcaption></figure>
       </div>
       <div class="fb-facts" id="soundFacts"></div>
+      <button type="button" class="hear-button save-song-button" id="saveSong">Save settings &amp; write a song</button>
     </section>
 
     <section id="chords" class="scale-section">
@@ -135,4 +136,5 @@
     </section>
   </div>
 </main>
+<dialog class="song-dialog" id="songDialog"><form method="dialog" id="songForm"><button type="button" class="dialog-close" id="closeSongDialog">×</button><p class="eyebrow">AI SONG SKETCH</p><h2>Turn this sound into a song</h2><p class="dialog-intro">Your selected settings shape the lyric. Edit anything you like, then download your song.</p><label class="song-title-label">SONG TITLE<input id="songTitle" type="text" maxlength="80" required></label><label class="song-lyrics-label">LYRICS<textarea id="songLyrics" rows="13"></textarea></label><div class="song-dialog-actions"><button type="button" class="hear-button" id="regenerateSong">Regenerate lyric</button><button type="submit" class="button button-dark">Save &amp; download .txt</button></div><p class="save-confirmation" id="saveConfirmation"></p></form></dialog>
 <footer class="course-footer"><div class="page-shell"><span>GUITAR FIELD NOTES</span><a href="../theory/index.html">Music theory</a><a href="../scales/index.html">Scales & harmony</a></div></footer></body></html>
