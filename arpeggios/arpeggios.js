@@ -229,6 +229,49 @@ $('#exampleTabs').addEventListener('click', (event) => {
 renderExample();
 
 // ---------- 05 soloing ----------
+const LEAD_EXAMPLES = [
+  {
+    name: 'A minor: a shape becomes a melody',
+    notes: [{ chord: 'Am' }, [3, 5, .5], [4, 5, .5], [5, 5, 1], [4, 5, .5], [3, 5, .5], [2, 7, 1]],
+    tones: [[3, 5, 'C', '♭3'], [4, 5, 'E', '5'], [5, 5, 'A', '1'], [2, 7, 'A', '1']],
+    caption: 'Frets 5–7, standard tuning. Read the top string as high e. Green dots are A roots; the other dots are C and E.',
+    text: 'Play C–E–A–E–C–A over Am. Count “1 & 2, 3 & 4”; the A notes on beats 2 and 4 last a full beat. This changes direction and holds notes instead of simply running up a shape.',
+    chords: [['A', 'minor']],
+    sequence: 'C (♭3) → E (5) → A (1) → E (5) → C (♭3) → A (1)'
+  },
+  {
+    name: 'Am to F: move one note, hear the change',
+    notes: [{ chord: 'Am' }, [3, 5, 1], [4, 5, 1], [5, 5, 1], [4, 5, 1], '|', { chord: 'F' }, [4, 6, 1], [5, 5, 1], [3, 5, 1], [4, 6, 1]],
+    tones: [[3, 5, 'C', 'shared'], [4, 5, 'E', 'Am only'], [5, 5, 'A', 'shared'], [4, 6, 'F', 'F root']],
+    caption: 'C and A stay at fret 5. On the B string, E at fret 5 moves to F at fret 6 when the chord changes.',
+    text: 'One bar of Am: C–E–A–E. One bar of F: F–A–C–F. Play quarter notes and count 1–2–3–4 in each bar. Landing on F at the change makes the new chord audible in your lead.',
+    chords: [['A', 'minor'], ['F', 'major']],
+    sequence: 'Am: C–E–A–E · F: F–A–C–F'
+  }
+];
+$('#leadExamples').innerHTML = LEAD_EXAMPLES.map((example, index) => {
+  const cells = example.tones.map(([s, f, note, degree]) => ({ s, f, label: note, cls: degree === '1' || degree === 'F root' ? 'root' : 'note', title: `${note}, ${degree}, ${STRING_NAMES[s]} string fret ${f}` }));
+  return `<article class="pattern-card arp-lead-card" data-lead-example="${index}">
+    <header><div><small>LEAD EXAMPLE ${index + 1} · 60 BPM · 4/4</small><h3>${example.name}</h3></div></header>
+    <p>${example.text}</p>
+    <figure><div class="neck-scroll" data-lead-board>${neckSvg(cells, { label: example.caption })}</div><figcaption>${example.caption}</figcaption></figure>
+    <p class="arp-lead-sequence">${example.sequence}</p>
+    <div class="tab-scroll" data-lead-tab>${tabSvg(example, 0, 50)}</div>
+    <div class="arp-lead-controls"><button type="button" class="hear-button" data-lead-play="${index}">▶ Hear lead + chords</button><button type="button" class="hear-button" data-lead-stop>■ Stop</button></div>
+  </article>`;
+}).join('');
+document.querySelectorAll('[data-lead-board]').forEach(wirePlayback);
+$('#leadExamples').addEventListener('click', (event) => {
+  if (event.target.closest('[data-lead-stop]')) { stopAll(); return; }
+  const button = event.target.closest('[data-lead-play]');
+  if (!button) return;
+  stopAll();
+  const example = LEAD_EXAMPLES[Number(button.dataset.leadPlay)];
+  const card = button.closest('[data-lead-example]');
+  example.chords.forEach(([root, quality], bar) => later(bar * 4000, () => sound.strum(voicingFor(root, quality), { level: .08, gap: .02 })));
+  scheduleNotes(example.notes, { beat: 1000, tab: card.querySelector('[data-lead-tab]'), board: card.querySelector('[data-lead-board]'), ring: .8 });
+});
+
 const SOLOS = [
   { name: 'Am – F – C – G · rock/pop, 5th position', chords: [['A', 'minor'], ['F', 'major'], ['C', 'major'], ['G', 'major']], low: 4, high: 8, tempo: 84, hint: 'Triad arpeggios. Watch how each bar starts next to where the last one ended.' },
   { name: 'Dm7 – G7 – Cmaj7 · jazz ii–V–I', chords: [['D', 'minor7'], ['G', 'dominant7'], ['C', 'major7'], ['C', 'major7']], low: 7, high: 10, tempo: 96, hint: 'Four-note 7th arpeggios. Listen for the 7th of each chord falling to the 3rd of the next.' },
