@@ -31,3 +31,39 @@ Every page has a title, description, canonical link, Open Graph and Twitter card
 
 These use the address `https://monijaman.github.io/GuiterMan/`. If the site is published somewhere else, replace that address in the HTML files, `chords/detail.js`, `robots.txt` and `sitemap.xml`.
 
+## Deploy to the VPS subdomain
+
+This project is a static site. Keep it separate from the Kossti Next.js app and serve it from `/var/www/guiter` through Nginx. Do not replace the PM2 process named `kossti`.
+
+```bash
+cd /var/www/guiter
+git pull origin main
+```
+
+The HTTPS server block for `guiter.kossti.com` should contain one static root and one `location /` block:
+
+```nginx
+root /var/www/guiter;
+index index.html;
+
+location / {
+    try_files $uri $uri/ =404;
+}
+```
+
+After editing `/etc/nginx/sites-enabled/guiter.kossti.com`, validate and reload Nginx:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+If Nginx reports `duplicate location "/"` or a conflicting `server_name`, remove old backup configurations from `sites-enabled` and keep only one `guiter.kossti.com` server definition. Backups should be stored outside `sites-enabled`.
+
+Verify the deployment:
+
+```bash
+curl -I https://guiter.kossti.com/
+sudo nginx -T | grep -A20 -B5 "server_name guiter.kossti.com"
+```
+
