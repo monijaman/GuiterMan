@@ -147,3 +147,17 @@
   .quiz-options,.quiz-genre,.where-grid{grid-template-columns:1fr}
   .j-chip{width:calc(50% - 5px)}
 }
+
+#storedSongsDialog{width:min(520px,calc(100% - 28px));border:1px solid var(--line);border-radius:20px;padding:0;overflow:hidden;background:var(--paper);box-shadow:0 28px 90px rgba(20,25,22,.32)}
+#storedSongsDialog::backdrop{background:rgba(20,25,22,.66);backdrop-filter:blur(3px)}
+#storedSongsDialog > .dialog-close{width:36px;height:36px;right:20px;top:20px;border-radius:50%;background:var(--white);border:1px solid var(--line);font-size:24px;line-height:30px;box-shadow:0 3px 12px rgba(20,25,22,.08)}
+#storedSongsDialog > .dialog-close:hover{background:var(--coral);color:#fff}
+#storedSongsDialog > .eyebrow,#storedSongsDialog > h2,#storedSongsDialog > #storedSongList{margin-left:28px;margin-right:28px}
+#storedSongsDialog > .eyebrow{padding-top:32px;margin-bottom:8px;color:var(--coral)}
+#storedSongsDialog h2{margin-top:0;margin-bottom:6px}
+#storedSongsDialog h2::after{content:'Your saved guitar ideas';display:block;margin-top:7px;color:var(--muted);font:12px var(--mono);letter-spacing:.02em}
+#storedSongList{display:grid;gap:10px;padding-top:14px;padding-bottom:32px;max-height:52vh;overflow:auto}
+.saved-song-title{display:flex;align-items:center;width:100%;min-height:54px;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);text-align:left;font:16px var(--serif);cursor:pointer;transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease}
+.saved-song-title::after{content:'→';margin-left:auto;color:var(--coral);font:18px var(--mono)}
+.saved-song-title:hover{transform:translateY(-2px);background:#fff8f3;border-color:var(--coral);box-shadow:0 8px 20px rgba(20,25,22,.08)}
+.saved-song-row{display:flex;align-items:center;gap:9px}.saved-song-row .saved-song-title{flex:1}.remove-saved-song{border:1px solid #d7b8ae;border-radius:9px;background:transparent;color:#a5503c;padding:10px 11px;font:11px var(--mono);cursor:pointer}.remove-saved-song:hover{background:#fff0eb;border-color:var(--coral)}

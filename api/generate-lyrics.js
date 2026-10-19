@@ -7,6 +7,7 @@ export default async function handler(req, res) {
     const response = await fetch('https://api.openai.com/v1/responses', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.OPENAI_API_KEY}` }, body: JSON.stringify({ model: process.env.OPENAI_MODEL || 'gpt-4.1-mini', input: prompt, max_output_tokens: 700 }) });
     const data = await response.json();
     if (!response.ok) return res.status(response.status).json({ error: data.error?.message || 'OpenAI request failed' });
-    return res.status(200).json({ lyrics: data.output_text || '' });
+    const lyrics = data.output_text || (data.output || []).flatMap((item) => item.content || []).filter((item) => item.type === 'output_text').map((item) => item.text).join('');
+    return res.status(200).json({ lyrics });
   } catch (error) { return res.status(500).json({ error: error.message || 'Generation failed' }); }
 }
